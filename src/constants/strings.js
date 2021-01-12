@@ -5,4 +5,11 @@ export default {
   emailId: 'Email id',
   phoneNumber: 'Phone number',
   password: 'Password',
+  warning_1: 'Username cannot be empty',
+  warning_2: 'Email cannot be empty',
+  warning_3: 'Wrong format email',
+  warning_4: 'Phone number cannot be empty',
+  warning_5: 'Wrong number format',
+  warning_6: 'Password cannot be empty',
+  warning_7: 'Password should be greater than 5 characters',
 };
