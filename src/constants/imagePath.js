@@ -7,4 +7,5 @@ export default {
   facebookIcon: require('../assets/images/facebook_icon.png'),
   eyeOnIcon: require('../assets/images/eye_on.png'),
   eyeOffIcon: require('../assets/images/eye_off.png'),
+  otpIcon: require('../assets/images/otp_code_icon.png'),
 };

@@ -284,6 +284,7 @@ const SignUp = () => {
           validateEmail(email);
           validatePhoneNumber(phoneNumber);
           validatePassword();
+          // navigation.navigate('OTPScreen');
         }}>
         <View style={styles.signUpButton}>
           <Text style={styles.buttonText}>{strings.signUp2}</Text>

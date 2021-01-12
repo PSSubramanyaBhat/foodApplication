@@ -8,22 +8,12 @@
 
 import React from 'react';
 import colors from './src/constants/colors';
+import OTPScreen from './src/screens/ForgotPassword/OTPScreen';
 import SignUp from './src/screens/SignUp/SignUp';
-// import {
-//   SafeAreaView,
-//   StyleSheet,
-//   ScrollView,
-//   View,
-//   Text,
-//   Image,
-//   StatusBar,
-//   TextInput,
-//   TouchableOpacity,
-//   ImageBackground,
-// } from 'react-native';
 
 const App = () => {
   return <SignUp />;
+  // return <OTPScreen />;
 };
 
 export default App;

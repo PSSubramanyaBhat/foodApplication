@@ -1,6 +1,7 @@
 export default {
   signUp1: 'Sign up',
   signUp2: 'Sign Up',
+  forgotpassword: 'Forgot Password',
   username: 'Username',
   emailId: 'Email id',
   phoneNumber: 'Phone number',
@@ -12,4 +13,7 @@ export default {
   warning_5: 'Wrong number format',
   warning_6: 'Password cannot be empty',
   warning_7: 'Password should be greater than 5 characters',
+  next: 'Next',
+  otpText1: 'An OTP code is sent to your phone. Enter it here',
+  otpText2: 'Enter OTP Code',
 };
