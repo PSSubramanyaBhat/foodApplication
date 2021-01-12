@@ -8,7 +8,7 @@
 
 import React from 'react';
 import colors from './src/constants/colors';
-import Home from './src/screens/Home/Home';
+import SignUp from './src/screens/SignUp/SignUp';
 // import {
 //   SafeAreaView,
 //   StyleSheet,
@@ -23,7 +23,7 @@ import Home from './src/screens/Home/Home';
 // } from 'react-native';
 
 const App = () => {
-  return <Home />;
+  return <SignUp />;
 };
 
 export default App;
