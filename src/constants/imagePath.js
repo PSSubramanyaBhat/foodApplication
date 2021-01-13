@@ -3,6 +3,7 @@ export default {
   callIcon: require('../assets/images/call_icon.png'),
   personIcon: require('../assets/images/person_icon.png'),
   lockIcon: require('../assets/images/lock_icon.png'),
+  openLockIcon: require('../assets/images/open_lock.png'),
   googleIcon: require('../assets/images/google_icon.png'),
   facebookIcon: require('../assets/images/facebook_icon.png'),
   eyeOnIcon: require('../assets/images/eye_on.png'),

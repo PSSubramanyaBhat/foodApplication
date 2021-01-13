@@ -67,6 +67,7 @@ const OTPScreen = ({navigation}) => {
           //   validatePhoneNumber(phoneNumber);
           //   validatePassword();
           navigation.navigate('ChangeForgotPassword');
+          // navigation.navigate('ChangePassword');
         }}>
         <View style={styles.nextButton}>
           <Text style={styles.buttonText}>{strings.next}</Text>
