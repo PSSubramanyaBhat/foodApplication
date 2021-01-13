@@ -17,9 +17,9 @@ import {
   Platform,
 } from 'react-native';
 
-const TITLE_PADDING_TOP = Platform.OS === 'ios' ? 60 : 0;
+const TITLE_PADDING_TOP = Platform.OS === 'ios' ? 30 : 0;
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -284,7 +284,7 @@ const SignUp = () => {
           validateEmail(email);
           validatePhoneNumber(phoneNumber);
           validatePassword();
-          // navigation.navigate('OTPScreen');
+          navigation.navigate('OTPScreen');
         }}>
         <View style={styles.signUpButton}>
           <Text style={styles.buttonText}>{strings.signUp2}</Text>
