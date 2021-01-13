@@ -4,9 +4,13 @@ export default {
   red: 'red',
   deepred: '#bd1402',
   white: 'white',
+  black: 'black',
+  darkBg: '#282828',
   gold: 'rgba(254,179,8,0.65)',
+  secondaryGold: 'gold',
   deepBlue: '#3b5998',
   grey: '#cccccc',
   darkGrey: '#aaaaaa',
   vermillion: '#f64307',
+  transparentColor: 'rgba(255,255,255,0.6)',
 };

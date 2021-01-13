@@ -34,6 +34,7 @@ const SignUp = ({navigation}) => {
   function validateUsername() {
     if (username === '') {
       setWarningValue(1);
+      return;
     }
   }
 
@@ -86,12 +87,15 @@ const SignUp = ({navigation}) => {
   }
 
   function validatePassword() {
+    setWarningValue4(2);
     if (password === '') {
       setWarningValue4(1);
       return;
     } else if (password.length < 6) {
       setWarningValue4(2);
       return;
+    } else {
+      setWarningValue4(0);
     }
   }
 
@@ -235,6 +239,7 @@ const SignUp = ({navigation}) => {
           placeholderTextColor={colors.darkGrey}
           onChangeText={(text) => {
             setPassword(text);
+            // validatePassword();
             setWarningValue4(0);
           }}></TextInput>
         {showPassword ? (
@@ -280,10 +285,23 @@ const SignUp = ({navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          validateUsername();
-          validateEmail(email);
-          validatePhoneNumber(phoneNumber);
-          validatePassword();
+          // validateUsername();
+          // validateEmail(email);
+          // validatePhoneNumber(phoneNumber);
+          // validatePassword();
+
+          // const conditionToNavigate =
+          //   warningvalue !== 0 ||
+          //   warningvalue2 !== 0 ||
+          //   warningvalue3 !== 0 ||
+          //   warningvalue4 !== 0;
+
+          // if (conditionToNavigate) {
+          //   console.log('Error');
+          // } else {
+          //   navigation.navigate('OTPScreen');
+          // }
+
           navigation.navigate('OTPScreen');
         }}>
         <View style={styles.signUpButton}>

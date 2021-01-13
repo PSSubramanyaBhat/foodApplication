@@ -12,6 +12,7 @@ import OTPScreen from './src/screens/ForgotPassword/OTPScreen';
 import SignUp from './src/screens/SignUp/SignUp';
 import ChangeForgotPassword from './src/screens/ChangePassword/ChangeForgotPassword';
 import ChangePassword from './src/screens/ChangePassword/ChangePassword';
+import LandingPage from './src/screens/LandingPage/LandingPage';
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -44,6 +45,11 @@ const App = () => {
           name="ChangeForgotPassword"
           component={ChangeForgotPassword}
           // options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="LandingPage"
+          component={LandingPage}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>

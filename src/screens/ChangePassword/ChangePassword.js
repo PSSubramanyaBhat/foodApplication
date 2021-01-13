@@ -20,7 +20,7 @@ import {
 
 const TITLE_PADDING_TOP = Platform.OS === 'ios' ? 60 : 0;
 
-const ChangePassword = () => {
+const ChangePassword = ({navigation}) => {
   //   const [showPassword, setShowPassword] = useState(false);
   //   const [username, setUsername] = useState('');
   //   const [email, setEmail] = useState('');
@@ -101,10 +101,8 @@ const ChangePassword = () => {
     return (
       <TouchableOpacity
         onPress={() => {
-          //   validateUsername();
-          //   validateEmail(email);
-          //   validatePhoneNumber(phoneNumber);
-          //   validatePassword();
+          navigation.navigate('LandingPage');
+          // navigation.navigate('OTPScreen');
         }}>
         <View style={styles.signUpButton}>
           <Text style={styles.buttonText}>{strings.next}</Text>
