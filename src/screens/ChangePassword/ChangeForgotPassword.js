@@ -20,7 +20,7 @@ import {
 
 const TITLE_PADDING_TOP = Platform.OS === 'ios' ? 60 : 0;
 
-const OTPScreen = ({navigation}) => {
+const ChangeForgotPassword = () => {
   //   const [showPassword, setShowPassword] = useState(false);
   //   const [username, setUsername] = useState('');
   //   const [email, setEmail] = useState('');
@@ -35,8 +35,10 @@ const OTPScreen = ({navigation}) => {
   const renderPageTitle = () => {
     return (
       <View style={styles.pageTitleSection}>
-        <Text style={styles.pageTitle}>{strings.forgotpassword}</Text>
-        <Text style={styles.descriptionText}>{strings.otpText1}</Text>
+        <Text style={styles.pageTitle}>{strings.changePassword}</Text>
+        <Text style={styles.descriptionText}>
+          {strings.changePasswordText2}
+        </Text>
       </View>
     );
   };
@@ -44,10 +46,10 @@ const OTPScreen = ({navigation}) => {
   const renderTextField1 = () => {
     return (
       <View style={styles.inputField}>
-        <Image style={styles.icons} source={imagePath.otpIcon}></Image>
+        <Image style={styles.icons} source={imagePath.lockIcon}></Image>
         <TextInput
           style={styles.inputSection}
-          placeholder={strings.otpText2}
+          placeholder={strings.changePasswordText2}
           placeholderTextColor={colors.darkGrey}
           secureTextEntry={true}
           onChangeText={(text) => {
@@ -58,7 +60,7 @@ const OTPScreen = ({navigation}) => {
     );
   };
 
-  const nextButton = () => {
+  const signUpButton = () => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -66,9 +68,8 @@ const OTPScreen = ({navigation}) => {
           //   validateEmail(email);
           //   validatePhoneNumber(phoneNumber);
           //   validatePassword();
-          navigation.navigate('ChangeForgotPassword');
         }}>
-        <View style={styles.nextButton}>
+        <View style={styles.signUpButton}>
           <Text style={styles.buttonText}>{strings.next}</Text>
         </View>
       </TouchableOpacity>
@@ -83,7 +84,7 @@ const OTPScreen = ({navigation}) => {
           {renderTextField1()}
 
           {/* TextFields */}
-          {nextButton()}
+          {signUpButton()}
         </View>
       </View>
     );
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
   },
-  nextButton: {
+  signUpButton: {
     height: 60,
     marginTop: 30,
     marginHorizontal: 30,
@@ -197,4 +198,4 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
 });
-export default OTPScreen;
+export default ChangeForgotPassword;

@@ -16,4 +16,8 @@ export default {
   next: 'Next',
   otpText1: 'An OTP code is sent to your phone. Enter it here',
   otpText2: 'Enter OTP Code',
+  changePassword: 'Change Password',
+  changePasswordText1: 'Enter Old Password',
+  changePasswordText2: 'Enter New Password',
+  save: 'Save',
 };

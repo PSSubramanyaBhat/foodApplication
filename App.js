@@ -10,6 +10,7 @@ import React from 'react';
 import colors from './src/constants/colors';
 import OTPScreen from './src/screens/ForgotPassword/OTPScreen';
 import SignUp from './src/screens/SignUp/SignUp';
+import ChangeForgotPassword from './src/screens/ChangePassword/ChangeForgotPassword';
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -31,6 +32,11 @@ const App = () => {
         <Stack.Screen
           name="OTPScreen"
           component={OTPScreen}
+          // options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChangeForgotPassword"
+          component={ChangeForgotPassword}
           // options={{headerShown: false}}
         />
       </Stack.Navigator>
