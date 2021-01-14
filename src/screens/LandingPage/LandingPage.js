@@ -20,6 +20,8 @@ import {
 } from 'react-native';
 import {color} from 'react-native-reanimated';
 
+const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
+
 const LandingPage = () => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
   const itemdata = foodAPIMockData[0].menu;
@@ -330,7 +332,8 @@ const styles = StyleSheet.create({
   },
   imageDisplay: {
     height: 140,
-    width: 180,
+    // width: 180,
+    width: 170,
   },
   offerDisplay: {
     height: 65,
@@ -342,6 +345,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     // zIndex: 1,
     marginTop: -65,
+    // marginLeft: -5,
   },
   searchBox: {
     flexDirection: 'row',
@@ -415,7 +419,7 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     borderStyle: 'solid',
     borderRadius: 8,
-    marginHorizontal: 14,
+    marginHorizontal: BETWEEN_GRID_WIDTH,
     marginTop: 20,
   },
   gridFoodName1: {
