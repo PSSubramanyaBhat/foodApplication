@@ -5,7 +5,7 @@ export default {
   deepred: '#bd1402',
   white: 'white',
   black: 'black',
-  darkBg: '#282828',
+  darkBg: '#343434',
   gold: 'rgba(254,179,8,0.65)',
   secondaryGold: 'gold',
   deepBlue: '#3b5998',

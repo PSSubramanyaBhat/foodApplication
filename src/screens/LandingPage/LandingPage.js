@@ -22,6 +22,7 @@ import {color} from 'react-native-reanimated';
 
 const LandingPage = () => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
+  const itemdata = foodAPIMockData[0].menu;
   return (
     <>
       <StatusBar
@@ -29,7 +30,7 @@ const LandingPage = () => {
         barStyle="light-content"
       />
       <SafeAreaView backgroundColor={colors.transparentBackgroundColor} />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.mainContainer}>
           <View style={styles.searchBarSection}>
             <View style={styles.searchBox}>
@@ -126,380 +127,99 @@ const LandingPage = () => {
           Available to you
         </Text>
         {/* Line 1 */}
-        <View
+        <FlatList
           style={{
-            flexDirection: 'row',
-            // justifyContent: 'center',
-            justifyContent: 'space-evenly',
-            // alignSelf: 'center',
-            // marginHorizontal: 10,
-            marginLeft: 5,
-            marginTop: 20,
-            // marginRight: 20,
-          }}>
-          {/* Type1 */}
-          <View
-            style={{
-              height: 250,
-              width: 170,
-              backgroundColor: colors.white,
-              borderWidth: 1,
-              borderColor: colors.white,
-              borderStyle: 'solid',
-              borderRadius: 8,
-            }}>
+            marginLeft: 9,
+          }}
+          data={itemdata}
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
+          numColumns={2}
+          renderItem={({item, index}) => (
             <View
-              style={{
-                height: 120,
-                width: 145,
-                backgroundColor: colors.primaryColor,
-                marginTop: 10,
-                marginLeft: 12,
-                borderWidth: 1,
-                borderColor: colors.primaryColor,
-                borderStyle: 'solid',
-                borderRadius: 8,
-              }}>
-              <Image
-                style={{
-                  zIndex: 1,
-                  height: 130,
-                  width: 140,
-                  // resizeMode: 'contain',
-                }}
-                source={imagePath.subSandwichImage}></Image>
-            </View>
-            <Text
-              style={{
-                fontSize: 16,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-              }}>
-              Sub Sandwich
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-                color: colors.darkGrey,
-              }}>
-              Fastfood
-            </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                style={{height: 18, width: 18, marginLeft: 10, marginTop: 2}}
-                source={imagePath.startIcon}></Image>
-              <Text style={{marginLeft: 2, marginTop: 4, fontSize: 12}}>
-                (4.5)
-              </Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              style={
+                index % 2 === 0
+                  ? [styles.gridViewBg1, {backgroundColor: colors.white}]
+                  : [styles.gridViewBg1, {backgroundColor: colors.darkBg}]
+              }>
+              <View style={styles.gridImage}>
+                <Image
+                  style={{
+                    zIndex: 1,
+                    height: 130,
+                    width: 140,
+                    resizeMode: 'contain',
+                  }}
+                  source={itemdata[index].image}></Image>
+              </View>
               <Text
-                style={{
-                  marginLeft: 13,
-                  marginTop: 8,
-                  fontSize: 19,
-                  fontWeight: '700',
-                }}>
-                $15.00
+                style={
+                  index % 2 === 0
+                    ? styles.gridFoodName1
+                    : [styles.gridFoodName1, {color: colors.white}]
+                }>
+                {/* Sub Sandwich */}
+                {itemdata[index].itemName}
               </Text>
-              <TouchableOpacity>
-                <View style={styles.addButton}>
-                  <Image
-                    style={{height: 25, width: 25, marginTop: 4, marginLeft: 2}}
-                    source={imagePath.addIcon}></Image>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-          {/* Type1 */}
-
-          {/* Type2 */}
-          <View
-            style={{
-              height: 250,
-              width: 170,
-              marginLeft: 14,
-              backgroundColor: colors.darkBg,
-              borderWidth: 1,
-              borderColor: colors.white,
-              borderStyle: 'solid',
-              borderRadius: 8,
-            }}>
-            <View
-              style={{
-                height: 120,
-                width: 145,
-                backgroundColor: colors.primaryColor,
-                marginTop: 10,
-                marginLeft: 12,
-                borderWidth: 1,
-                borderColor: colors.primaryColor,
-                borderStyle: 'solid',
-                borderRadius: 8,
-              }}>
-              <Image
-                style={{
-                  zIndex: 1,
-                  height: 130,
-                  width: 140,
-                  resizeMode: 'contain',
-                }}
-                source={imagePath.burgerImage}></Image>
-            </View>
-            <Text
-              style={{
-                fontSize: 16,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-                color: colors.white,
-              }}>
-              Cheese Burger
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-                color: colors.white,
-              }}>
-              Fastfood
-            </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                style={{height: 18, width: 18, marginLeft: 10, marginTop: 2}}
-                source={imagePath.startIcon}></Image>
               <Text
-                style={{
-                  marginLeft: 2,
-                  marginTop: 4,
-                  fontSize: 12,
-                  color: colors.white,
-                }}>
-                (4.5)
+                style={
+                  index % 2 === 0
+                    ? [styles.gridFoodType1, {color: colors.darkGrey}]
+                    : [styles.gridFoodType1, {color: colors.white}]
+                }>
+                {/* Fastfood */}
+                {itemdata[index].type}
               </Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text
+              <View style={{flexDirection: 'row', marginTop: 3}}>
+                <Image
+                  style={{
+                    height: 18,
+                    width: 18,
+                    marginLeft: 10,
+                    marginTop: 2,
+                  }}
+                  source={imagePath.startIcon}></Image>
+                <Text
+                  style={
+                    index % 2 === 0
+                      ? styles.gridRating
+                      : [styles.gridRating, {color: colors.white}]
+                  }>
+                  {/* (4.5) */}
+                  {itemdata[index].rating}
+                </Text>
+              </View>
+              <View
                 style={{
-                  marginLeft: 13,
-                  marginTop: 8,
-                  fontSize: 19,
-                  fontWeight: '700',
-                  color: colors.white,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
                 }}>
-                $15.00
-              </Text>
-              <TouchableOpacity>
-                <View style={styles.addButton}>
-                  <Image
-                    style={{height: 25, width: 25, marginTop: 4, marginLeft: 2}}
-                    source={imagePath.addIcon}></Image>
-                </View>
-              </TouchableOpacity>
+                <Text
+                  style={
+                    index % 2 === 0
+                      ? styles.gridCost
+                      : [styles.gridCost, {color: colors.white}]
+                  }>
+                  {/* $15.00 */}${itemdata[index].cost}
+                </Text>
+                <TouchableOpacity>
+                  <View style={styles.addButton}>
+                    <Image
+                      style={{
+                        height: 25,
+                        width: 25,
+                        marginTop: 4,
+                        marginLeft: 2,
+                      }}
+                      source={imagePath.addIcon}></Image>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          {/* Type2 */}
-
-          {/* ABOVE 2 VIEWS MUST BE PUT IN ITS PARENT VIEW WHICH INTURN SHOULD BE INSIDE A LIST VIEW AND DATA SHOULD BE RENDERED BASED ON EVEN INDEX CONDITION CHECKING */}
-        </View>
+          )}
+        />
         {/* Line 1 */}
-
-        {/* Line 2  for trial*/}
-        <View
-          style={{
-            flexDirection: 'row',
-            // justifyContent: 'center',
-            justifyContent: 'space-evenly',
-            // alignSelf: 'center',
-            // marginHorizontal: 10,
-            marginLeft: 5,
-            marginTop: 20,
-            // marginRight: 20,
-          }}>
-          {/* Type1 */}
-          <View
-            style={{
-              height: 250,
-              width: 170,
-              backgroundColor: colors.white,
-              borderWidth: 1,
-              borderColor: colors.white,
-              borderStyle: 'solid',
-              borderRadius: 8,
-            }}>
-            <View
-              style={{
-                height: 120,
-                width: 145,
-                backgroundColor: colors.primaryColor,
-                marginTop: 10,
-                marginLeft: 12,
-                borderWidth: 1,
-                borderColor: colors.primaryColor,
-                borderStyle: 'solid',
-                borderRadius: 8,
-              }}>
-              <Image
-                style={{
-                  zIndex: 1,
-                  height: 130,
-                  width: 140,
-                  resizeMode: 'contain',
-                }}
-                source={imagePath.potatoFries}></Image>
-            </View>
-            <Text
-              style={{
-                fontSize: 16,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-              }}>
-              Potato Fries
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-                color: colors.darkGrey,
-              }}>
-              Fastfood
-            </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                style={{height: 18, width: 18, marginLeft: 10, marginTop: 2}}
-                source={imagePath.startIcon}></Image>
-              <Text style={{marginLeft: 2, marginTop: 4, fontSize: 12}}>
-                (4.5)
-              </Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text
-                style={{
-                  marginLeft: 13,
-                  marginTop: 8,
-                  fontSize: 19,
-                  fontWeight: '700',
-                }}>
-                $15.00
-              </Text>
-              <TouchableOpacity>
-                <View style={styles.addButton}>
-                  <Image
-                    style={{height: 25, width: 25, marginTop: 4, marginLeft: 2}}
-                    source={imagePath.addIcon}></Image>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-          {/* Type1 */}
-
-          {/* Type2 */}
-          <View
-            style={{
-              height: 250,
-              width: 170,
-              marginLeft: 14,
-              backgroundColor: colors.darkBg,
-              borderWidth: 1,
-              borderColor: colors.white,
-              borderStyle: 'solid',
-              borderRadius: 8,
-            }}>
-            <View
-              style={{
-                height: 120,
-                width: 145,
-                backgroundColor: colors.primaryColor,
-                marginTop: 10,
-                marginLeft: 12,
-                borderWidth: 1,
-                borderColor: colors.primaryColor,
-                borderStyle: 'solid',
-                borderRadius: 8,
-              }}>
-              <Image
-                style={{
-                  zIndex: 1,
-                  height: 130,
-                  width: 140,
-                  resizeMode: 'contain',
-                }}
-                source={imagePath.frenchFries}></Image>
-            </View>
-            <Text
-              style={{
-                fontSize: 16,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-                color: colors.white,
-              }}>
-              French Fries
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                marginLeft: 13,
-                marginTop: 5,
-                fontWeight: '500',
-                color: colors.white,
-              }}>
-              Fastfood
-            </Text>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                style={{height: 18, width: 18, marginLeft: 10, marginTop: 2}}
-                source={imagePath.startIcon}></Image>
-              <Text
-                style={{
-                  marginLeft: 2,
-                  marginTop: 4,
-                  fontSize: 12,
-                  color: colors.white,
-                }}>
-                (4.5)
-              </Text>
-            </View>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text
-                style={{
-                  marginLeft: 13,
-                  marginTop: 8,
-                  fontSize: 19,
-                  fontWeight: '700',
-                  color: colors.white,
-                }}>
-                $15.00
-              </Text>
-              <TouchableOpacity>
-                <View style={styles.addButton}>
-                  <Image
-                    style={{height: 25, width: 25, marginTop: 4, marginLeft: 2}}
-                    source={imagePath.addIcon}></Image>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-          {/* Type2 */}
-
-          {/* ABOVE 2 VIEWS MUST BE PUT IN ITS PARENT VIEW WHICH INTURN SHOULD BE INSIDE A LIST VIEW AND DATA SHOULD BE RENDERED BASED ON EVEN INDEX CONDITION CHECKING */}
-        </View>
-
-        {/* ALSO DO PROPER STYLESHEET STYLING AND ADD ATRINGS TO STRINGS FILE */}
-        {/* Line 2  for trial*/}
       </ScrollView>
     </>
   );
@@ -687,6 +407,50 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderRadius: 10,
     // backgroundColor: colors.secondaryGold,
+  },
+  gridViewBg1: {
+    height: 250,
+    width: 170,
+    borderWidth: 1,
+    borderColor: colors.white,
+    borderStyle: 'solid',
+    borderRadius: 8,
+    marginHorizontal: 14,
+    marginTop: 20,
+  },
+  gridFoodName1: {
+    fontSize: 16,
+    marginLeft: 13,
+    marginTop: 5,
+    fontWeight: '600',
+  },
+  gridFoodType1: {
+    fontSize: 12,
+    marginLeft: 13,
+    marginTop: 5,
+    fontWeight: '500',
+  },
+  gridRating: {
+    marginLeft: 2,
+    marginTop: 4,
+    fontSize: 12,
+  },
+  gridCost: {
+    marginLeft: 13,
+    marginTop: 8,
+    fontSize: 19,
+    fontWeight: '700',
+  },
+  gridImage: {
+    height: 120,
+    width: 145,
+    backgroundColor: colors.primaryColor,
+    marginTop: 10,
+    marginLeft: 12,
+    borderWidth: 1,
+    borderColor: colors.primaryColor,
+    borderStyle: 'solid',
+    borderRadius: 8,
   },
 });
 export default LandingPage;
