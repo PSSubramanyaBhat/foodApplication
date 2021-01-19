@@ -22,7 +22,7 @@ import {color} from 'react-native-reanimated';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 
-const LandingPage = () => {
+const LandingPage = ({navigation}) => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
   const itemdata = foodAPIMockData[0].menu;
   return (
@@ -42,21 +42,26 @@ const LandingPage = () => {
                 placeholder={'Search for food'}
                 placeholderTextColor={colors.darkGrey}></TextInput>
             </View>
-            <View style={styles.bagButton}>
-              <View style={styles.orderCountContainer}>
-                <Text
-                  style={{
-                    color: colors.white,
-                    fontWeight: '600',
-                    marginLeft: 5,
-                    marginTop: 1,
-                    fontSize: 12,
-                  }}>
-                  0
-                </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('FoodDisplayPage');
+              }}>
+              <View style={styles.bagButton}>
+                <View style={styles.orderCountContainer}>
+                  <Text
+                    style={{
+                      color: colors.white,
+                      fontWeight: '600',
+                      marginLeft: 5,
+                      marginTop: 1,
+                      fontSize: 12,
+                    }}>
+                    0
+                  </Text>
+                </View>
+                <Image style={styles.icons} source={imagePath.bagIcon} />
               </View>
-              <Image style={styles.icons} source={imagePath.bagIcon} />
-            </View>
+            </TouchableOpacity>
           </View>
           <ImageBackground
             style={styles.headerImage}

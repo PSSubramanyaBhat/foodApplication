@@ -19,6 +19,11 @@ export default {
   subSandwichImage: require('../assets/images/subway.png'),
   startIcon: require('../assets/images/star.png'),
   addIcon: require('../assets/images/add.png'),
+  minusIcon: require('../assets/images/minus.png'),
   potatoFries: require('../assets/images/potatoFries.png'),
   frenchFries: require('../assets/images/frenchFries.png'),
+  backArrowIcon: require('../assets/images/backArrow.png'),
+  mapIcon: require('../assets/images/location.png'),
+  cashIcon: require('../assets/images/cash.png'),
+  timerIcon: require('../assets/images/timer.png'),
 };
