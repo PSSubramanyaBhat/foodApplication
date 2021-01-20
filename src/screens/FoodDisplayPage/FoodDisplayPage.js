@@ -25,7 +25,11 @@ const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 
 const FoodDisplayPage = ({navigation}) => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
+  const [toggleSection, setToggleSection] = useState(true);
   const itemdata = foodAPIMockData[0].menu;
+  const ingredientData = foodAPIMockData[0].menu[0].ingredientImages;
+  const ingredientNameData = foodAPIMockData[0].menu[0].ingredients;
+  const hotelData = foodAPIMockData[0].alternateHotels;
   return (
     <>
       <StatusBar
@@ -88,14 +92,14 @@ const FoodDisplayPage = ({navigation}) => {
                     <Image style={styles.mapIcon} source={imagePath.cashIcon} />
                     <Text style={{marginTop: 8, marginLeft: 2}}>$15.00</Text>
                   </View>
-                  <View style={{flexDirection: 'row'}}>
+                  <View style={{flexDirection: 'row', marginLeft: 6}}>
                     <Image
                       style={styles.mapIcon}
                       source={imagePath.startIcon}
                     />
-                    <Text style={{marginTop: 9}}>4.5</Text>
+                    <Text style={{marginTop: 9}}>4.5 stars</Text>
                   </View>
-                  <View style={{flexDirection: 'row'}}>
+                  <View style={{flexDirection: 'row', marginLeft: 6}}>
                     <Image
                       style={styles.mapIcon}
                       source={imagePath.timerIcon}
@@ -128,6 +132,144 @@ const FoodDisplayPage = ({navigation}) => {
                 </View>
               </View>
             </View>
+          </View>
+          {/* Ingredient description and more */}
+          <View style={{flexDirection: 'column'}}>
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                onPress={() => {
+                  setToggleSection(!toggleSection);
+                }}>
+                <Text
+                  style={
+                    toggleSection
+                      ? styles.ingredient_review_Section
+                      : [
+                          styles.ingredient_review_Section,
+                          {color: colors.darkGrey},
+                        ]
+                  }>
+                  Ingredients
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setToggleSection(!toggleSection);
+                }}>
+                <Text
+                  style={
+                    toggleSection
+                      ? [
+                          styles.ingredient_review_Section,
+                          {color: colors.darkGrey},
+                        ]
+                      : styles.ingredient_review_Section
+                  }>
+                  Reviews
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{marginHorizontal: 30, marginTop: 15}}>
+              <Text style={{fontSize: 15, lineHeight: 25}}>
+                Cheeses like Cheddar, Gruyere, Parmesan, and its Pecorino work
+                well with all kinds of burgers.
+              </Text>
+            </View>
+            <FlatList
+              style={{marginLeft: 20, marginTop: 20}}
+              data={ingredientData}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) => {
+                return item.id;
+              }}
+              renderItem={({item, index}) => (
+                <View key={index} style={styles.foodType}>
+                  <Image style={{width: 40, height: 40}} source={item.icon} />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontWeight: '600',
+                      paddingTop: 3,
+                    }}>
+                    {ingredientNameData[index].name}
+                  </Text>
+                </View>
+              )}
+            />
+
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Text
+                style={{
+                  fontSize: 22,
+                  fontWeight: '500',
+                  marginLeft: 30,
+                  marginTop: 20,
+                  marginBottom: -10,
+                }}>
+                Popular Restaurants
+              </Text>
+              <Text
+                style={{
+                  // fontSize: 22,
+                  color: colors.darkGrey,
+                  fontWeight: '600',
+                  marginRight: 20,
+                  marginTop: 25,
+                  marginBottom: -10,
+                }}>
+                View All
+              </Text>
+            </View>
+            <FlatList
+              style={{marginLeft: 0, marginTop: 20}}
+              data={hotelData}
+              // horizontal={true}
+              // showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item, index) => {
+                return item.id;
+              }}
+              renderItem={({item, index}) => (
+                <View key={index} style={styles.centralJustifiedView}>
+                  <View style={styles.hotelInfoContainer}>
+                    <Image
+                      style={styles.hotelImageView}
+                      source={hotelData[index].hotelImage}
+                    />
+                    <View style={styles.hotelInfoView}>
+                      <Text style={{fontSize: 20, fontWeight: '600'}}>
+                        Hotel {hotelData[index].hotelName}
+                        {/* Hotel */}
+                      </Text>
+                      <View style={{flexDirection: 'row', marginLeft: -11}}>
+                        <Image
+                          style={styles.mapIcon}
+                          source={imagePath.mapIcon}
+                        />
+                        <Text
+                          style={{paddingTop: 9, paddingLeft: 2, fontSize: 12}}>
+                          {hotelData[index].hotelLocation},{' '}
+                          {hotelData[index].hotelArea},{' '}
+                          {hotelData[index].hotelState}
+                        </Text>
+                      </View>
+                      <View style={{flexDirection: 'row', marginLeft: -11}}>
+                        <Image
+                          style={styles.mapIcon}
+                          source={imagePath.startIcon}
+                        />
+                        <Text
+                          style={{paddingTop: 7, paddingLeft: 2, fontSize: 16}}>
+                          {hotelData[index].hotelRating} stars
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              )}
+            />
           </View>
         </View>
       </ScrollView>
@@ -213,9 +355,51 @@ const styles = StyleSheet.create({
     width: '85%',
     // height: '53%',
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 10,
+    marginLeft: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  ingredient_review_Section: {
+    fontSize: 22,
+    fontWeight: '500',
+    marginLeft: 30,
+    marginTop: 25,
+  },
+  foodType: {
+    backgroundColor: colors.white,
+    height: 80,
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    marginHorizontal: 8,
+    borderWidth: 1,
+    borderColor: colors.grey,
+    borderStyle: 'solid',
+    // opacity: 0.9,
+    borderRadius: 10,
+    // backgroundColor: colors.secondaryGold,
+  },
+  hotelInfoContainer: {
+    backgroundColor: colors.white,
+    width: '90%',
+    // height: '53%',
+    borderRadius: 10,
+    marginTop: 10,
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+  },
+  hotelImageView: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+    height: 100,
+    width: 100,
+    borderRadius: 10,
+  },
+  hotelInfoView: {
+    flexDirection: 'column',
+    marginLeft: 0,
+    marginTop: 20,
   },
 });
 export default FoodDisplayPage;

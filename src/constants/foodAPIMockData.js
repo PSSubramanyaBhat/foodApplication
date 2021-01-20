@@ -3,6 +3,35 @@ export default [
   {
     id: 1,
     categoryName: 'Burger',
+    alternateHotels: [
+      {
+        hotelName: 'Shiva Sagar',
+        hotelLocation: 'Konchadi',
+        hotelArea: 'Mangalore',
+        hotelState: 'Karnataka',
+        hotelCountry: 'India',
+        hotelRating: 4.5,
+        hotelImage: imagePath.shivSagar,
+      },
+      {
+        hotelName: 'Vrindavan',
+        hotelLocation: 'Circuit House',
+        hotelArea: 'Mangalore',
+        hotelState: 'Karnataka',
+        hotelCountry: 'India',
+        hotelRating: 4.6,
+        hotelImage: imagePath.vrindavan,
+      },
+      {
+        hotelName: 'Vardhaman',
+        hotelLocation: 'Yeyyadi',
+        hotelArea: 'Mangalore',
+        hotelState: 'Karnataka',
+        hotelCountry: 'India',
+        hotelRating: 4.4,
+        hotelImage: imagePath.vardhaman,
+      },
+    ],
     menu: [
       {
         itemId: 1,
@@ -11,6 +40,18 @@ export default [
         rating: 4.5,
         cost: '15.50',
         image: imagePath.subSandwichImage,
+        ingredients: [
+          {name: 'potato'},
+          {name: 'cheese'},
+          {name: 'lettuce'},
+          {name: 'buns'},
+        ],
+        ingredientImages: [
+          {icon: imagePath.potatoIcon1},
+          {icon: imagePath.cheeseIcon},
+          {icon: imagePath.lettuceIcon},
+          {icon: imagePath.bunsIcon},
+        ],
       },
       {
         itemId: 2,
@@ -19,6 +60,8 @@ export default [
         rating: 4.5,
         cost: '13.00',
         image: imagePath.burgerImage,
+        ingredients: '',
+        ingredientImages: [],
       },
       {
         itemId: 3,
@@ -27,6 +70,8 @@ export default [
         rating: 4.5,
         cost: '12.00',
         image: imagePath.potatoFries,
+        ingredients: '',
+        ingredientImages: [],
       },
       {
         itemId: 4,
@@ -35,6 +80,8 @@ export default [
         rating: 4.5,
         cost: '12.50',
         image: imagePath.frenchFries,
+        ingredients: '',
+        ingredientImages: [],
       },
     ],
   },

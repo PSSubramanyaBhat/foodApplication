@@ -26,4 +26,13 @@ export default {
   mapIcon: require('../assets/images/location.png'),
   cashIcon: require('../assets/images/cash.png'),
   timerIcon: require('../assets/images/timer.png'),
+  bunsIcon: require('../assets/images/buns.png'),
+  lettuceIcon: require('../assets/images/lettuce.png'),
+  cheeseIcon: require('../assets/images/cheese.png'),
+  potatoIcon1: require('../assets/images/potato.png'),
+  potatoIcon2: require('../assets/images/potato2.png'),
+  potatoIcon3: require('../assets/images/potato3.png'),
+  shivSagar: require('../assets/images/shivSagar.jpg'),
+  vrindavan: require('../assets/images/vrindavan.jpg'),
+  vardhaman: require('../assets/images/vardhaman.jpg'),
 };

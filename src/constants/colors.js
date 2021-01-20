@@ -13,4 +13,5 @@ export default {
   darkGrey: '#aaaaaa',
   vermillion: '#f64307',
   transparentColor: 'rgba(255,255,255,0.6)',
+  borderGrey: '#666666',
 };
