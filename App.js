@@ -14,6 +14,7 @@ import ChangeForgotPassword from './src/screens/ChangePassword/ChangeForgotPassw
 import ChangePassword from './src/screens/ChangePassword/ChangePassword';
 import LandingPage from './src/screens/LandingPage/LandingPage';
 import FoodDisplayPage from './src/screens/FoodDisplayPage/FoodDisplayPage';
+import SearchPage from './src/screens/SearchPage/SearchPage';
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -55,6 +56,11 @@ const App = () => {
         <Stack.Screen
           name="FoodDisplayPage"
           component={FoodDisplayPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SearchPage"
+          component={SearchPage}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

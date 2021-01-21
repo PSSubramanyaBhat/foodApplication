@@ -6,6 +6,8 @@ export default {
   white: 'white',
   black: 'black',
   darkBg: '#343434',
+  darkBg2: 'rgba(20,20,30,0.9)',
+  // darkBg2: 'rgba(1,15,37,0.9)',
   gold: 'rgba(254,179,8,0.65)',
   secondaryGold: 'gold',
   deepBlue: '#3b5998',

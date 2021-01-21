@@ -101,4 +101,8 @@ export default [
     id: 5,
     categoryName: 'Drinks',
   },
+  {
+    id: 6,
+    categoryName: 'Pasta',
+  },
 ];

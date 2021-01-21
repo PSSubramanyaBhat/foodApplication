@@ -20,6 +20,7 @@ import {
   Platform,
 } from 'react-native';
 import {color} from 'react-native-reanimated';
+import {ClipPath} from 'react-native-svg';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 
@@ -30,6 +31,8 @@ const FoodDisplayPage = ({navigation}) => {
   const ingredientData = foodAPIMockData[0].menu[0].ingredientImages;
   const ingredientNameData = foodAPIMockData[0].menu[0].ingredients;
   const hotelData = foodAPIMockData[0].alternateHotels;
+
+  const [currentFoodOrderCount, setCurrentFoodOrderCount] = useState(0);
   return (
     <>
       <StatusBar
@@ -53,6 +56,18 @@ const FoodDisplayPage = ({navigation}) => {
               </View>
             </TouchableOpacity>
             <View style={[styles.topSectionButton, styles.bagIconView]}>
+              <View style={styles.orderCountContainer}>
+                <Text
+                  style={{
+                    color: colors.white,
+                    fontWeight: '600',
+                    marginLeft: 5,
+                    marginTop: 1,
+                    fontSize: 12,
+                  }}>
+                  0
+                </Text>
+              </View>
               <Image style={styles.icons} source={imagePath.bagIcon} />
             </View>
           </View>
@@ -109,12 +124,17 @@ const FoodDisplayPage = ({navigation}) => {
                 </View>
               </View>
               <View style={styles.buttonSection}>
-                <View style={[styles.plusMinusView, {marginTop: 10}]}>
-                  <Image
-                    style={styles.plusMinusIcons}
-                    source={imagePath.addIcon}
-                  />
-                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    setCurrentFoodOrderCount((c) => c + 1);
+                  }}>
+                  <View style={[styles.plusMinusView, {marginTop: 10}]}>
+                    <Image
+                      style={styles.plusMinusIcons}
+                      source={imagePath.addIcon}
+                    />
+                  </View>
+                </TouchableOpacity>
                 <Text
                   style={{
                     fontSize: 15,
@@ -122,14 +142,21 @@ const FoodDisplayPage = ({navigation}) => {
                     paddingLeft: 12,
                     paddingTop: 5,
                   }}>
-                  2
+                  {currentFoodOrderCount}
                 </Text>
-                <View style={[styles.plusMinusView, {marginTop: 5}]}>
-                  <Image
-                    style={styles.plusMinusIcons}
-                    source={imagePath.minusIcon}
-                  />
-                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (currentFoodOrderCount > 0) {
+                      setCurrentFoodOrderCount((c) => c - 1);
+                    }
+                  }}>
+                  <View style={[styles.plusMinusView, {marginTop: 5}]}>
+                    <Image
+                      style={styles.plusMinusIcons}
+                      source={imagePath.minusIcon}
+                    />
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -289,6 +316,7 @@ const styles = StyleSheet.create({
     height: 45,
     width: 46,
     // backgroundColor: 'red',
+    marginTop: 20,
     marginHorizontal: 15,
     borderRadius: 5,
     alignItems: 'center',
@@ -313,7 +341,7 @@ const styles = StyleSheet.create({
   },
   icons: {
     // marginLeft: 5,
-    marginTop: 5,
+    marginTop: -5,
     height: 30,
     width: 30,
   },
@@ -400,6 +428,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 0,
     marginTop: 20,
+  },
+  orderCountContainer: {
+    height: 22,
+    width: 22,
+    backgroundColor: colors.darkBg,
+    borderWidth: 2,
+    borderColor: colors.transparentColor,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    zIndex: 1,
+    marginTop: -10,
+    marginLeft: 35,
   },
 });
 export default FoodDisplayPage;
