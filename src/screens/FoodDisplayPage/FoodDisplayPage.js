@@ -33,6 +33,7 @@ const FoodDisplayPage = ({navigation}) => {
   const hotelData = foodAPIMockData[0].alternateHotels;
 
   const [currentFoodOrderCount, setCurrentFoodOrderCount] = useState(0);
+  const [addToFavourite, setAddToFavourite] = useState(false);
   return (
     <>
       <StatusBar
@@ -76,6 +77,34 @@ const FoodDisplayPage = ({navigation}) => {
               style={styles.foodImageDisplay}
               source={imagePath.burgerImage}
             />
+          </View>
+
+          <View style={styles.centralJustifiedView}>
+            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{fontSize: 12, marginTop: -10}}>
+                  Add To Favourite
+                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setAddToFavourite(!addToFavourite);
+                  }}>
+                  <Image
+                    style={styles.favouriteIcon}
+                    source={
+                      addToFavourite
+                        ? imagePath.favouriteOff
+                        : imagePath.favouriteOn
+                    }
+                  />
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity>
+                <View style={styles.orderButton}>
+                  <Text style={{fontSize: 17, marginTop: 9}}>Order</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={styles.centralJustifiedView}>
@@ -297,6 +326,12 @@ const FoodDisplayPage = ({navigation}) => {
                 </View>
               )}
             />
+            <View
+              style={{
+                height: 20,
+                marginTop: 20,
+                backgroundColor: colors.primaryColor,
+              }}></View>
           </View>
         </View>
       </ScrollView>
@@ -360,6 +395,12 @@ const styles = StyleSheet.create({
   mapIcon: {
     marginTop: 8,
     marginLeft: 7,
+    height: 18,
+    width: 18,
+  },
+  favouriteIcon: {
+    marginTop: -12,
+    marginLeft: 1,
     height: 18,
     width: 18,
   },
@@ -440,6 +481,21 @@ const styles = StyleSheet.create({
     zIndex: 1,
     marginTop: -10,
     marginLeft: 35,
+  },
+  orderButton: {
+    height: 45,
+    width: 153,
+    marginLeft: 15,
+    marginTop: 15,
+    borderWidth: 2,
+    borderColor: colors.white,
+    borderStyle: 'solid',
+    borderRadius: 10,
+    justifyContent: 'center',
+    // fontSize: 25,
+    // textAlign: 'center',
+    flexDirection: 'row',
+    backgroundColor: colors.secondaryGold,
   },
 });
 export default FoodDisplayPage;

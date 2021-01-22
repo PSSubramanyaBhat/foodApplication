@@ -39,4 +39,6 @@ export default {
   shivSagar: require('../assets/images/shivSagar.jpg'),
   vrindavan: require('../assets/images/vrindavan.jpg'),
   vardhaman: require('../assets/images/vardhaman.jpg'),
+  favouriteOff: require('../assets/images/favouriteOff.png'),
+  favouriteOn: require('../assets/images/favouriteOn.png'),
 };

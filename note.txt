@@ -1,0 +1,33 @@
+Add Bottom Navigation with
+    * Home, 
+    * Favourites,
+    * Searched Dishes
+    * Profile
+
+Add Drawer Navigation with
+    * Profile Top Section, 
+    * Ratings,
+    * Feedback
+    * Logout
+
+
+PLAN:
+* LANDING PAGE:
+    * On Click  of Available Types in the Landing page, It should Display Available Dishes,
+    * On Click of + on each Item grid Tile, it shoul route to the FoodLandingPage with respective Data,
+    * API data for the daily special order,
+    * API Data for all the above category foods and items under them,
+    * If incase empty dish under a category on a particular day, display no item image,
+    * Search for a dish and it should be redirected to the save page, also store searched dish list,
+    * Bag Icon should route to list of MyOrdersPage.
+
+* SEARCH PAGE:
+    * Display searcged result and also name in searcg bar,
+    * Must allow to search new dishes and display result,
+    * On Click of + and - it should add to list of orders,
+    * On Click should turn color to dark Bg,
+    * On Long Click should redirect to MapPage and give options for home delivery,
+    * Giving option Settings,
+    * Set co-ordinate data for geolocations in API Data if possible.
+
+***********PLAN THE REST TOMORROW WITHFRESH MIND***********
