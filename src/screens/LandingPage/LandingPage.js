@@ -19,11 +19,17 @@ import {
   Platform,
 } from 'react-native';
 import {color} from 'react-native-reanimated';
+import {HeartOutline, HeartFilled} from '../../assets/CommonSVG';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 
 const LandingPage = ({navigation}) => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
+  const [selectHomeTab, setSelectHomeTab] = useState(true);
+  const [selectSearchTab, setSelectSearchTab] = useState(false);
+  const [selectFavouriteTab, setSelectFavouriteTab] = useState(false);
+  const [selectProfileTab, setSelectProfileTab] = useState(false);
+
   const itemdata = foodAPIMockData[0].menu;
   return (
     <>
@@ -35,6 +41,19 @@ const LandingPage = ({navigation}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.mainContainer}>
           <View style={styles.searchBarSection}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}>
+              <Image
+                style={{
+                  height: 30,
+                  width: 30,
+                  marginTop: 8,
+                  marginLeft: 20,
+                }}
+                source={imagePath.menuIcon}></Image>
+            </TouchableOpacity>
             <View style={styles.searchBox}>
               <TouchableOpacity
                 onPress={() => {
@@ -49,7 +68,7 @@ const LandingPage = ({navigation}) => {
             </View>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('FoodDisplayPage');
+                navigation.navigate('MyOrdersPage');
               }}>
               <View style={styles.bagButton}>
                 <View style={styles.orderCountContainer}>
@@ -218,7 +237,10 @@ const LandingPage = ({navigation}) => {
                   }>
                   {/* $15.00 */}${itemdata[index].cost}
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('FoodDisplayPage');
+                  }}>
                   <View style={styles.addButton}>
                     <Image
                       style={{
@@ -236,6 +258,140 @@ const LandingPage = ({navigation}) => {
         />
         {/* Line 1 */}
       </ScrollView>
+      <View
+        style={{
+          height: 80,
+          paddingTop: 10,
+          backgroundColor: colors.darkBg2,
+          borderTopWidth: 2,
+          borderColor: 'rgba(255,255,255,0.9)',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            setSelectHomeTab(true);
+            setSelectSearchTab(false);
+            setSelectFavouriteTab(false);
+            setSelectProfileTab(false);
+          }}>
+          <View>
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={
+                selectHomeTab ? imagePath.homeFilled : imagePath.homeWhite
+              }
+            />
+            <Text
+              style={
+                selectHomeTab
+                  ? {color: colors.gold2, fontSize: 12, paddingTop: 3}
+                  : {color: colors.white, fontSize: 12, paddingTop: 3}
+              }>
+              Home
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setSelectHomeTab(false);
+            setSelectSearchTab(true);
+            setSelectFavouriteTab(false);
+            setSelectProfileTab(false);
+            navigation.navigate('SearchPage');
+          }}>
+          <View>
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={
+                selectSearchTab ? imagePath.searchYellow : imagePath.searchWhite
+              }
+            />
+            <Text
+              style={
+                selectSearchTab
+                  ? {color: colors.gold2, fontSize: 12, paddingTop: 3}
+                  : {color: colors.white, fontSize: 12, paddingTop: 3}
+              }>
+              Search
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setSelectHomeTab(false);
+            setSelectSearchTab(false);
+            setSelectFavouriteTab(true);
+            setSelectProfileTab(false);
+          }}>
+          <View>
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={
+                selectFavouriteTab
+                  ? imagePath.heartFilled
+                  : imagePath.heartOutline
+              }
+            />
+            <Text
+              style={
+                selectFavouriteTab
+                  ? {color: colors.gold2, fontSize: 12, paddingTop: 3}
+                  : {color: colors.white, fontSize: 12, paddingTop: 3}
+              }>
+              Favourites
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setSelectHomeTab(false);
+            setSelectSearchTab(false);
+            setSelectFavouriteTab(false);
+            setSelectProfileTab(true);
+          }}>
+          <View>
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={
+                selectProfileTab
+                  ? imagePath.profileFilled
+                  : imagePath.profileWhite
+              }
+            />
+            <Text
+              style={
+                selectProfileTab
+                  ? {color: colors.gold2, fontSize: 12, paddingTop: 3}
+                  : {color: colors.white, fontSize: 12, paddingTop: 3}
+              }>
+              Profile
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        {/*<HeartFilled width={24} height={24} />  */}
+      </View>
     </>
   );
 };
@@ -364,13 +520,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.white,
     height: 45,
-    width: '75%',
+    // width: '75%',
+    width: '65%',
     borderColor: colors.white,
     // borderColor: colors.grey,
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 5,
-    marginLeft: 20,
+    // marginLeft: 5,
     paddingTop: 5,
     paddingLeft: 10,
   },

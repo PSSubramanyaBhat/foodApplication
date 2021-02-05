@@ -15,6 +15,10 @@ import ChangePassword from './src/screens/ChangePassword/ChangePassword';
 import LandingPage from './src/screens/LandingPage/LandingPage';
 import FoodDisplayPage from './src/screens/FoodDisplayPage/FoodDisplayPage';
 import SearchPage from './src/screens/SearchPage/SearchPage';
+import MyOrdersPage from './src/screens/MyOrdersPage/MyOrdersPage';
+
+import StackScreens from './src/screens/Navigator/StackNavigator';
+import HomePageDrawerNavigation from './src/screens/Navigator/DrawerNavigator';
 
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -23,47 +27,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 const App = () => {
-  // return <SignUp />;
-  // return <OTPScreen />;
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="OTPScreen"
-          component={OTPScreen}
-          // options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChangePassword"
-          component={ChangePassword}
-          // options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChangeForgotPassword"
-          component={ChangeForgotPassword}
-          // options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="LandingPage"
-          component={LandingPage}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="FoodDisplayPage"
-          component={FoodDisplayPage}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SearchPage"
-          component={SearchPage}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
+      {/* <StackScreens /> */}
+      <HomePageDrawerNavigation />
     </NavigationContainer>
   );
 };

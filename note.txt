@@ -8,6 +8,7 @@ Add Drawer Navigation with
     * Profile Top Section, 
     * Ratings,
     * Feedback
+    * Starred Hotels
     * Logout
 
 
@@ -29,5 +30,28 @@ PLAN:
     * On Long Click should redirect to MapPage and give options for home delivery,
     * Giving option Settings,
     * Set co-ordinate data for geolocations in API Data if possible.
+
+* MY ORDER PAGE:
+    * Should Display All ordered food.
+    * If Given Order in food display page it should disappear from that page,
+    * Else all dishes can be together ordered in that page,
+    * Only Bill and small icons and descfription of food should appear there for payment.
+    * On Long Click On Any Food, The Tile Color Should Change to Dark Bg, and close Icon should appear to cancel the order.
+
+* MAP PAGE:
+    * Should search for place based on name of the place.
+
+* FAVOURITES PAGE:
+    * List of all Fovurites selected Dishes should be in the list and can be removed from there.
+
+* SEARCHED DISH PAGE:
+    * List of all searched dished must be there, can clear from there.
+
+* FOOD FISPLAY PAGE:
+    * Full Data from API,
+    * In white first container, display first hotel name at the top,
+    * On Click of Hotel, Navigatioin to Google Map,
+    * Review Display, horizontal slide,
+    * + and - clicked, should show value near bag icon, until ordered list is cleared, it should display value.
 
 ***********PLAN THE REST TOMORROW WITHFRESH MIND***********
