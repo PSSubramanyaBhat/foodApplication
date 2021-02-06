@@ -1,4 +1,7 @@
 import * as React from 'react';
+import {Image} from 'react-native';
+import imagePath from '../../constants/imagePath';
+import colors from '../../constants/colors';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -9,6 +12,7 @@ import {
   StarredHotelScreen,
   SampleScreen,
 } from './StackNavigator';
+import CustomSidebarMenu from './CustomSidebarMenu';
 
 import {
   SafeAreaView,
@@ -19,17 +23,43 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import {color} from 'react-native-reanimated';
 
 const Drawer = createDrawerNavigator();
 
 const HomePageDrawerNavigation = ({navigation}) => {
   return (
-    <Drawer.Navigator initialRouteName="HomeScreen">
+    <Drawer.Navigator
+      initialRouteName="HomeScreen"
+      drawerContentOptions={{
+        // activeTintColor: 'red',
+        // activeBackgroundColor: 'grey',
+        inactiveTintColor: 'white',
+        // inactiveBackgroundColor: 'white',
+        labelStyle: {
+          // marginLeft: 5,
+        },
+      }}
+      drawerContent={(props) => <CustomSidebarMenu {...props} />}
+      // drawerStyle={{backgroundColor: colors.darkBg2}}
+      drawerStyle={{backgroundColor: colors.darkBg3}}>
       <Drawer.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{
           title: 'Home',
+          // drawerLabel: () => {},
+          drawerIcon: () => (
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                // marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={imagePath.homeFilled}
+            />
+          ),
         }}
       />
       <Drawer.Screen
@@ -37,6 +67,17 @@ const HomePageDrawerNavigation = ({navigation}) => {
         component={RatingScreen}
         options={{
           title: 'Rating',
+          drawerIcon: () => (
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                // marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={imagePath.startIcon}
+            />
+          ),
         }}
       />
       <Drawer.Screen
@@ -44,6 +85,17 @@ const HomePageDrawerNavigation = ({navigation}) => {
         component={FeedbackScreen}
         options={{
           title: 'Feedback',
+          drawerIcon: () => (
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                // marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={imagePath.feedBackYellow}
+            />
+          ),
         }}
       />
       <Drawer.Screen
@@ -51,6 +103,17 @@ const HomePageDrawerNavigation = ({navigation}) => {
         component={StarredHotelScreen}
         options={{
           title: 'Starred Hotel',
+          drawerIcon: () => (
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                // marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={imagePath.hotelOutline}
+            />
+          ),
         }}
       />
       <Drawer.Screen
@@ -58,6 +121,17 @@ const HomePageDrawerNavigation = ({navigation}) => {
         component={SampleScreen}
         options={{
           title: 'Sample Screen',
+          drawerIcon: () => (
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                // marginTop: 4,
+                alignSelf: 'center',
+              }}
+              source={imagePath.logOutFilled}
+            />
+          ),
         }}
       />
     </Drawer.Navigator>
