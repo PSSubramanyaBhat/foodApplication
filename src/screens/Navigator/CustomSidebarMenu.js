@@ -16,6 +16,7 @@ import {
 } from '@react-navigation/drawer';
 import imagePath from '../../constants/imagePath';
 import colors from '../../constants/colors';
+import Divider from '../../components/Divider';
 // import Divider from './Divider';
 
 const CustomSidebarMenu = (props) => {
@@ -40,6 +41,13 @@ const CustomSidebarMenu = (props) => {
           source={imagePaths.personIcon}
         />
       </View>
+      <Text style={{color: colors.white, textAlign: 'center', marginTop: 10}}>
+        SUBRAMANYA BHAT PS
+      </Text>
+      <Text style={{color: colors.white, textAlign: 'center', marginTop: 5}}>
+        FoodCourt App
+      </Text>
+      <Divider dividerColor={colors.white} />
       {/* <Divider /> */}
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
