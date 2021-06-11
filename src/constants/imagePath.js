@@ -66,4 +66,10 @@ export default {
   downChevronIcon: require('../assets/images/downChevron.png'),
   upChevronIcon: require('../assets/images/upChevron.png'),
   tomatoIcon: require('../assets/images/tomato.png'),
+  burgerIcon: require('../assets/images/foodCategoryIcons/burgerIcon.png'),
+  pizzaIcon: require('../assets/images/foodCategoryIcons/pizzaIcon.png'),
+  dessertIcon: require('../assets/images/foodCategoryIcons/dessertIcon.png'),
+  friesIcon: require('../assets/images/foodCategoryIcons/friesIcon.png'),
+  drinkscon: require('../assets/images/foodCategoryIcons/drinksIcon.png'),
+  pastaIcon: require('../assets/images/foodCategoryIcons/pastaIcon.png'),
 };

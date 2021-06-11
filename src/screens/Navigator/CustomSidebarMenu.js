@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -6,6 +6,7 @@ import {
   Image,
   Text,
   Linking,
+  TouchableOpacity,
 } from 'react-native';
 import imagePaths from '../../constants/imagePath';
 
@@ -18,11 +19,49 @@ import imagePath from '../../constants/imagePath';
 import colors from '../../constants/colors';
 import Divider from '../../components/Divider';
 // import Divider from './Divider';
+import ImagePicker, {
+  launchCamera,
+  launchImageLibrary,
+} from 'react-native-image-picker';
 
 const CustomSidebarMenu = (props) => {
+  const [filepath, setFilePath] = useState({
+    data: '',
+    uri: '',
+  });
+  const [fileData, setFileData] = useState('');
+  const [fileUri, setFileUri] = useState('');
+
   const BASE_PATH =
     'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
   const proileImage = 'react_logo.png';
+
+  const openPicker = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        const source = {uri: response.uri};
+        console.log('response', JSON.stringify(response));
+        setFilePath(response);
+        setFileData(response.data);
+        setFileUri(response.uri);
+      }
+    });
+  };
 
   return (
     <SafeAreaView
@@ -33,14 +72,19 @@ const CustomSidebarMenu = (props) => {
         backgroundColor: colors.darkBg3,
       }}>
       {/*Top Large Image */}
-      <View style={styles.circularAvtar}>
-        <Image
-          style={styles.appAvtarImage}
-          // source={{uri: BASE_PATH + proileImage}}
-          // source={imagePaths.personIcon}
-          source={imagePaths.personIcon}
-        />
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          openPicker();
+        }}>
+        <View style={styles.circularAvtar}>
+          <Image
+            style={styles.appAvtarImage}
+            // source={{uri: BASE_PATH + proileImage}}
+            // source={imagePaths.personIcon}
+            source={imagePaths.personIcon}
+          />
+        </View>
+      </TouchableOpacity>
       <Text style={{color: colors.white, textAlign: 'center', marginTop: 10}}>
         SUBRAMANYA BHAT PS
       </Text>

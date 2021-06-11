@@ -18,8 +18,8 @@ import {
   ImageBackground,
   Platform,
 } from 'react-native';
-import {color} from 'react-native-reanimated';
-import {HeartOutline, HeartFilled} from '../../assets/CommonSVG';
+// import {color} from 'react-native-reanimated';
+// import {HeartOutline, HeartFilled} from '../../assets/CommonSVG';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 
@@ -34,6 +34,7 @@ const LandingPage = ({navigation}) => {
   );
 
   const itemdata = foodAPIMockData[0].menu;
+
   return (
     <>
       <StatusBar
@@ -41,263 +42,298 @@ const LandingPage = ({navigation}) => {
         barStyle="light-content"
       />
       <SafeAreaView backgroundColor={colors.transparentBackgroundColor} />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.mainContainer}>
-          <View style={styles.searchBarSection}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.toggleDrawer();
-              }}>
-              <Image
-                style={{
-                  height: 30,
-                  width: 30,
-                  marginTop: 8,
-                  marginLeft: 20,
-                }}
-                source={imagePath.menuIcon}></Image>
-            </TouchableOpacity>
-            <View style={styles.searchBox}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('SearchPage');
-                }}>
-                <Image style={styles.icons2} source={imagePath.searchIcon} />
-              </TouchableOpacity>
-              <TextInput
-                style={{marginLeft: 12, fontSize: 15}}
-                placeholder={'Search for food'}
-                placeholderTextColor={colors.darkGrey}></TextInput>
-            </View>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('MyOrdersPage');
-              }}>
-              <View style={styles.bagButton}>
-                <View style={styles.orderCountContainer}>
-                  <Text
-                    style={{
-                      color: colors.white,
-                      fontWeight: '600',
-                      marginLeft: 5,
-                      marginTop: 1,
-                      fontSize: 12,
-                    }}>
-                    0
-                  </Text>
-                </View>
-                <Image style={styles.icons} source={imagePath.bagIcon} />
-              </View>
-            </TouchableOpacity>
-          </View>
-          <ImageBackground
-            style={styles.headerImage}
-            imageStyle={{borderRadius: 10}}
-            source={imagePath.backgrounImage1}>
-            <View style={styles.headerFoodDisplay}>
-              <View style={styles.foodInfoSection}>
-                <Text style={styles.foodName}>Cheese Burger</Text>
-                <View style={styles.timeStampDisplay}>
-                  <View style={styles.timeBlock}>
-                    <Text style={styles.timeColor}>23</Text>
-                  </View>
-                  <View style={styles.timeBlock}>
-                    <Text style={styles.timeColor}>18</Text>
-                  </View>
-                  <View style={styles.timeBlock}>
-                    <Text style={styles.timeColor}>41</Text>
-                  </View>
-                  <Text style={{marginTop: 17, marginLeft: 5}}>hrs.</Text>
-                </View>
-                <TouchableOpacity>
-                  <View style={styles.orderButton}>
-                    <Text style={{fontSize: 17, marginTop: 9}}>Order Now</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.foodImageSection}>
-                <Image
-                  source={imagePath.burgerImage}
-                  style={styles.imageDisplay}></Image>
-                <View style={styles.offerDisplay}>
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: colors.secondaryGold,
-                      // marginLeft: 5,
-                      marginTop: 14,
-                      textAlign: 'center',
-                      fontWeight: '600',
-                    }}>
-                    SPECIAL <Text style={{color: colors.white}}>OFFER</Text>
-                  </Text>
-                  {/* <Text>OFFER</Text> */}
-                </View>
-              </View>
-            </View>
-          </ImageBackground>
-        </View>
-        <ScrollView
-          style={{marginTop: 53, height: 100}}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}>
-          <View style={styles.foodScrollView}>
-            <FlatList
-              // showsVerticalScrollIndicator={false}
-              data={foodAPIMockData}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item, index) => {
-                return item.id;
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+      <View style={styles.mainContainer}>
+        <View style={styles.searchBarSection}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}>
+            <Image
+              style={{
+                height: 30,
+                width: 30,
+                marginTop: 8,
+                marginLeft: 20,
               }}
-              renderItem={({item, index}) => (
-                <TouchableOpacity
-                  onPress={() => {
-                    console.log('PRESSED Item', item.categoryName);
-                    setSelectedFoodCategoryTile(item.categoryName);
-                  }}>
-                  <View
-                    key={index}
-                    style={[
-                      {
-                        backgroundColor:
-                          selectedFoodCategoryTile === item.categoryName
-                            ? colors.secondaryGold
-                            : 'white',
-                      },
-                      styles.foodType,
-                    ]}>
-                    <Text style={{fontSize: 16, fontWeight: '600'}}>
-                      {foodAPIMockData[index].categoryName}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
+              source={imagePath.menuIcon}></Image>
+          </TouchableOpacity>
+          <View style={styles.searchBox}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('SearchPage');
+              }}>
+              <Image style={styles.icons2} source={imagePath.searchIcon} />
+            </TouchableOpacity>
+            <TextInput
+              style={{marginLeft: 12, fontSize: 13, letterSpacing: 0.01}}
+              placeholder={'Search for food'}
+              placeholderTextColor={colors.darkGrey}></TextInput>
           </View>
-        </ScrollView>
-        <Text style={{fontSize: 30, fontWeight: '500', marginLeft: 23}}>
-          Available to you
-        </Text>
-        {/* Line 1 */}
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('MyOrdersPage');
+            }}>
+            <View style={styles.bagButton}>
+              <View style={styles.orderCountContainer}>
+                <Text
+                  style={{
+                    color: colors.white,
+                    fontWeight: '600',
+                    marginLeft: 5,
+                    marginTop: 1,
+                    fontSize: 12,
+                  }}>
+                  0
+                </Text>
+              </View>
+              <Image style={styles.icons} source={imagePath.bagIcon} />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <ImageBackground
+          style={styles.headerImage}
+          imageStyle={{borderRadius: 10}}
+          source={imagePath.backgrounImage1}>
+          <View style={styles.headerFoodDisplay}>
+            <View style={styles.foodInfoSection}>
+              <Text style={styles.foodName}>Cheese Burger</Text>
+              <View style={styles.timeStampDisplay}>
+                <View style={styles.timeBlock}>
+                  <Text style={styles.timeColor}>23</Text>
+                </View>
+                <View style={styles.timeBlock}>
+                  <Text style={styles.timeColor}>18</Text>
+                </View>
+                <View style={styles.timeBlock}>
+                  <Text style={styles.timeColor}>41</Text>
+                </View>
+                <Text style={{marginTop: 17, marginLeft: 5}}>hrs.</Text>
+              </View>
+              <TouchableOpacity>
+                <View style={styles.orderButton}>
+                  <Text style={{fontSize: 17, marginTop: 9}}>Order Now</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.foodImageSection}>
+              <Image
+                source={imagePath.burgerImage}
+                style={styles.imageDisplay}></Image>
+              <View style={styles.offerDisplay}>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: colors.secondaryGold,
+                    // marginLeft: 5,
+                    marginTop: 14,
+                    textAlign: 'center',
+                    fontWeight: '600',
+                  }}>
+                  SPECIAL <Text style={{color: colors.white}}>OFFER</Text>
+                </Text>
+                {/* <Text>OFFER</Text> */}
+              </View>
+            </View>
+          </View>
+        </ImageBackground>
+      </View>
+
+      {/* <ScrollView
+        style={{backgroundColor: 'red', marginTop: -380}}
+        showsVerticalScrollIndicator={false}> */}
+      <View style={styles.foodScrollView}>
         <FlatList
-          style={{
-            marginLeft: 9,
-          }}
-          data={itemdata}
+          // showsVerticalScrollIndicator={false}
+          data={foodAPIMockData}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
           keyExtractor={(item, index) => {
             return item.id;
           }}
-          numColumns={2}
           renderItem={({item, index}) => (
-            <View
-              style={
-                index % 2 === 0
-                  ? [styles.gridViewBg1, {backgroundColor: colors.white}]
-                  : [styles.gridViewBg1, {backgroundColor: colors.darkBg}]
-              }>
-              <View style={styles.gridImage}>
-                <Image
-                  style={{
-                    zIndex: 1,
-                    height: 130,
-                    width: 140,
-                    resizeMode: 'contain',
-                  }}
-                  source={itemdata[index].image}></Image>
-              </View>
-              <Text
-                style={
-                  index % 2 === 0
-                    ? styles.gridFoodName1
-                    : [styles.gridFoodName1, {color: colors.white}]
-                }>
-                {/* Sub Sandwich */}
-                {itemdata[index].itemName}
-              </Text>
-              <Text
-                style={
-                  index % 2 === 0
-                    ? [styles.gridFoodType1, {color: colors.darkGrey}]
-                    : [styles.gridFoodType1, {color: colors.white}]
-                }>
-                {/* Fastfood */}
-                {itemdata[index].type}
-              </Text>
-              <View style={{flexDirection: 'row', marginTop: 3}}>
-                <Image
-                  style={{
-                    height: 18,
-                    width: 18,
-                    marginLeft: 10,
-                    marginTop: 2,
-                  }}
-                  source={imagePath.startIcon}></Image>
-                <Text
-                  style={
-                    index % 2 === 0
-                      ? styles.gridRating
-                      : [styles.gridRating, {color: colors.white}]
-                  }>
-                  {/* (4.5) */}
-                  {itemdata[index].rating}
-                </Text>
-              </View>
+            <TouchableOpacity
+              onPress={() => {
+                console.log('PRESSED Item', item.categoryName);
+                setSelectedFoodCategoryTile(item.categoryName);
+              }}>
               <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <Text
-                  style={
-                    index % 2 === 0
-                      ? styles.gridCost
-                      : [styles.gridCost, {color: colors.white}]
-                  }>
-                  {/* $15.00 */}${itemdata[index].cost}
-                </Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    const selectedFoodName = itemdata[index].itemName;
-                    const selectedFoodRating = itemdata[index].rating;
-                    const selectedFoodCost = itemdata[index].cost;
-                    const selectedFoodImage = itemdata[index].image;
-                    const selectedFoodTimeDuration =
-                      itemdata[index].timeDuration;
-                    const selectedFoodDescription = itemdata[index].description;
-                    const selectedFoodIngredients = itemdata[index].ingredients;
-                    const selectedFoodIngredientImages =
-                      itemdata[index].ingredientImages;
-
-                    const jsonData = {
-                      selectedFoodName: selectedFoodName,
-                      selectedFoodRating: selectedFoodRating,
-                      selectedFoodCost: selectedFoodCost,
-                      selectedFoodImage: selectedFoodImage,
-                      selectedFoodTimeDuration: selectedFoodTimeDuration,
-                      selectedFoodDescription: selectedFoodDescription,
-                      selectedFoodIngredients: selectedFoodIngredients,
-                      selectedFoodIngredientImages: selectedFoodIngredientImages,
-                    };
-                    navigation.navigate('FoodDisplayPage', {jsonData});
+                key={index}
+                style={[
+                  {
+                    backgroundColor:
+                      selectedFoodCategoryTile === item.categoryName
+                        ? colors.secondaryGold
+                        : 'white',
+                  },
+                  styles.foodType,
+                ]}>
+                <View
+                  style={{
+                    flexDirection: 'column',
+                    flex: 1,
+                    // justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
                   }}>
-                  <View style={styles.addButton}>
+                  <View
+                    style={{
+                      borderRadius: 50,
+                      backgroundColor: 'white',
+                      height: 60,
+                      width: 60,
+                      // flex: 1,
+                      alignItems: 'center',
+                    }}>
                     <Image
                       style={{
-                        height: 25,
-                        width: 25,
-                        marginTop: 4,
-                        marginLeft: 2,
+                        height: 30,
+                        width: 30,
+                        marginTop: 15,
                       }}
-                      source={imagePath.addIcon}></Image>
+                      source={foodAPIMockData[index].categoryIcon}></Image>
                   </View>
-                </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      fontWeight: '600',
+                      textAlign: 'center',
+                    }}>
+                    {foodAPIMockData[index].categoryName}
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
-        {/* Line 1 */}
-      </ScrollView>
+      </View>
+
+      <Text
+        style={{
+          fontSize: 14,
+          fontWeight: 'bold',
+          marginLeft: 25,
+          marginBottom: 10,
+        }}>
+        Available to you
+      </Text>
+      {/* Line 1 */}
+      <FlatList
+        style={{
+          marginLeft: 9,
+        }}
+        data={itemdata}
+        keyExtractor={(item, index) => {
+          return item.id;
+        }}
+        numColumns={2}
+        renderItem={({item, index}) => (
+          <View
+            style={
+              index % 2 === 0
+                ? [styles.gridViewBg1, {backgroundColor: colors.white}]
+                : [styles.gridViewBg1, {backgroundColor: colors.darkBg}]
+            }>
+            <View style={styles.gridImage}>
+              <Image
+                style={{
+                  zIndex: 1,
+                  height: 130,
+                  width: 140,
+                  resizeMode: 'contain',
+                }}
+                source={itemdata[index].image}></Image>
+            </View>
+            <Text
+              style={
+                index % 2 === 0
+                  ? styles.gridFoodName1
+                  : [styles.gridFoodName1, {color: colors.white}]
+              }>
+              {/* Sub Sandwich */}
+              {itemdata[index].itemName}
+            </Text>
+            <Text
+              style={
+                index % 2 === 0
+                  ? [styles.gridFoodType1, {color: colors.darkGrey}]
+                  : [styles.gridFoodType1, {color: colors.white}]
+              }>
+              {/* Fastfood */}
+              {itemdata[index].type}
+            </Text>
+            <View style={{flexDirection: 'row', marginTop: 3}}>
+              <Image
+                style={{
+                  height: 18,
+                  width: 18,
+                  marginLeft: 10,
+                  marginTop: 2,
+                }}
+                source={imagePath.startIcon}></Image>
+              <Text
+                style={
+                  index % 2 === 0
+                    ? styles.gridRating
+                    : [styles.gridRating, {color: colors.white}]
+                }>
+                {/* (4.5) */}
+                {itemdata[index].rating}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text
+                style={
+                  index % 2 === 0
+                    ? styles.gridCost
+                    : [styles.gridCost, {color: colors.white}]
+                }>
+                {/* $15.00 */}${itemdata[index].cost}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  const selectedFoodName = itemdata[index].itemName;
+                  const selectedFoodRating = itemdata[index].rating;
+                  const selectedFoodCost = itemdata[index].cost;
+                  const selectedFoodImage = itemdata[index].image;
+                  const selectedFoodTimeDuration = itemdata[index].timeDuration;
+                  const selectedFoodDescription = itemdata[index].description;
+                  const selectedFoodIngredients = itemdata[index].ingredients;
+                  const selectedFoodIngredientImages =
+                    itemdata[index].ingredientImages;
+
+                  const jsonData = {
+                    selectedFoodName: selectedFoodName,
+                    selectedFoodRating: selectedFoodRating,
+                    selectedFoodCost: selectedFoodCost,
+                    selectedFoodImage: selectedFoodImage,
+                    selectedFoodTimeDuration: selectedFoodTimeDuration,
+                    selectedFoodDescription: selectedFoodDescription,
+                    selectedFoodIngredients: selectedFoodIngredients,
+                    selectedFoodIngredientImages: selectedFoodIngredientImages,
+                  };
+                  navigation.navigate('FoodDisplayPage', {jsonData});
+                }}>
+                <View style={styles.addButton}>
+                  <Image
+                    style={{
+                      height: 25,
+                      width: 25,
+                      marginTop: 4,
+                      marginLeft: 2,
+                    }}
+                    source={imagePath.addIcon}></Image>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+      />
+      {/* Line 1 */}
+      {/* </ScrollView> */}
       <View
         style={{
           height: 80,
@@ -437,13 +473,13 @@ const LandingPage = ({navigation}) => {
 };
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'column',
   },
   headerImage: {
     width: '94%',
     // height: '65%',
-    height: '95%',
+    height: '60%',
     resizeMode: 'cover',
     marginTop: 20,
     marginHorizontal: 25,
@@ -451,7 +487,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   headerFoodDisplay: {
-    height: '74%',
+    height: '47%',
     width: '85%',
     marginTop: 25,
     marginLeft: -22,
@@ -566,7 +602,8 @@ const styles = StyleSheet.create({
     // borderColor: colors.grey,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderRadius: 5,
+    // borderRadius: 5,
+    borderRadius: 25,
     // marginLeft: 5,
     paddingTop: 5,
     paddingLeft: 10,
@@ -575,6 +612,7 @@ const styles = StyleSheet.create({
     height: 45,
     width: 45,
     backgroundColor: colors.secondaryGold,
+    // backgroundColor: colors.vermillionLight,
     borderColor: colors.gold,
     borderWidth: 1,
     borderStyle: 'solid',
@@ -585,8 +623,10 @@ const styles = StyleSheet.create({
   addButton: {
     height: 35,
     width: 35,
-    backgroundColor: colors.secondaryGold,
-    borderColor: colors.gold,
+    // backgroundColor: colors.secondaryGold,
+    backgroundColor: colors.vermillionLight,
+    // borderColor: colors.gold,
+    borderColor: colors.vermillionLight,
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 5,
@@ -601,18 +641,22 @@ const styles = StyleSheet.create({
   },
   icons2: {
     // marginLeft: 5,
-    marginTop: 4,
-    height: 30,
-    width: 30,
+    marginTop: 8,
+    height: 20,
+    width: 20,
   },
   foodScrollView: {
     flexDirection: 'row',
     alignSelf: 'center',
     paddingLeft: 16,
+    marginTop: -283,
+    marginBottom: 20,
   },
   foodType: {
     // backgroundColor: colors.white,
-    height: 45,
+    // height: 45,
+    height: 125,
+    width: 85,
     paddingHorizontal: 20,
     paddingVertical: 12,
     marginHorizontal: 8,
@@ -620,6 +664,7 @@ const styles = StyleSheet.create({
     borderColor: colors.transparentColor,
     borderStyle: 'solid',
     borderRadius: 10,
+    alignItems: 'center',
     // backgroundColor: colors.secondaryGold,
   },
   gridViewBg1: {

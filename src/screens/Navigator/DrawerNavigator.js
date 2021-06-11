@@ -23,7 +23,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {color} from 'react-native-reanimated';
+// import {color} from 'react-native-reanimated';
 
 const Drawer = createDrawerNavigator();
 

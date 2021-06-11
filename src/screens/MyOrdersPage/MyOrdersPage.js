@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import colors from '../../constants/colors';
-import {MapIcon} from '../../constants/commonSVGFiles';
+// import {MapIcon} from '../../constants/commonSVGFiles';
 import imagePath from '../../constants/imagePath';
 import strings from '../../constants/strings';
 import foodAPIMockData from '../../constants/foodAPIMockData';
@@ -19,8 +19,8 @@ import {
   ImageBackground,
   Platform,
 } from 'react-native';
-import {color} from 'react-native-reanimated';
-import {ClipPath} from 'react-native-svg';
+// import {color} from 'react-native-reanimated';
+// import {ClipPath} from 'react-native-svg';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 

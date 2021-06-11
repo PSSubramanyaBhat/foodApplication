@@ -18,6 +18,7 @@ export default {
   grey: '#cccccc',
   darkGrey: '#aaaaaa',
   vermillion: '#f64307',
+  vermillionLight: 'rgba(246, 67, 7, 0.8)',
   transparentColor: 'rgba(255,255,255,0.6)',
   borderGrey: '#666666',
 };

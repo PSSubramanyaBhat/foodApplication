@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import colors from '../../constants/colors';
-import {MapIcon} from '../../constants/commonSVGFiles';
+// import {MapIcon} from '../../constants/commonSVGFiles';
 import imagePath from '../../constants/imagePath';
 import strings from '../../constants/strings';
 import foodAPIMockData from '../../constants/foodAPIMockData';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,8 +22,8 @@ import {
   LayoutAnimation,
   UIManager,
 } from 'react-native';
-import {color} from 'react-native-reanimated';
-import {ClipPath} from 'react-native-svg';
+// import {color} from 'react-native-reanimated';
+// import {ClipPath} from 'react-native-svg';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 
@@ -38,6 +39,10 @@ const FoodDisplayPage = ({navigation, route}) => {
 
   const [currentFoodOrderCount, setCurrentFoodOrderCount] = useState(0);
   const [addToFavourite, setAddToFavourite] = useState(false);
+
+  const [smallSizedFood, setSmallSizedFood] = useState(false);
+  const [mediumSizedFood, setMediumSizedFood] = useState(true);
+  const [largeSizedFood, setLargeSizedFood] = useState(false);
 
   const [descriptionStatus, setDescriptionStatus] = useState(false);
 
@@ -122,6 +127,83 @@ const FoodDisplayPage = ({navigation, route}) => {
               // source={imagePath.burgerImage}
               source={selectedFoodImage}
             />
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'center',
+              alignItems: 'center',
+              marginBottom: -10,
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                setSmallSizedFood(true);
+                setMediumSizedFood(false);
+                setLargeSizedFood(false);
+              }}>
+              <View
+                style={{
+                  height: 30,
+                  width: 30,
+                  backgroundColor:
+                    smallSizedFood === true ? colors.vermillionLight : 'white',
+                  alignItems: 'center',
+                  paddingTop: 6,
+                  borderRadius: 15,
+                  marginRight: 30,
+                }}>
+                <Text style={{textAlign: 'center', fontWeight: 'bold'}}>S</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setSmallSizedFood(false);
+                setMediumSizedFood(false);
+                setLargeSizedFood(true);
+              }}>
+              <View
+                style={{
+                  height: 30,
+                  width: 30,
+                  backgroundColor:
+                    largeSizedFood === true ? colors.vermillionLight : 'white',
+                  alignItems: 'center',
+                  paddingTop: 6,
+                  borderRadius: 15,
+                  marginLeft: 30,
+                }}>
+                <Text style={{textAlign: 'center', fontWeight: 'bold'}}>L</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'center',
+              alignItems: 'center',
+              marginBottom: 30,
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                setSmallSizedFood(false);
+                setMediumSizedFood(true);
+                setLargeSizedFood(false);
+              }}>
+              <View
+                style={{
+                  height: 30,
+                  width: 30,
+                  backgroundColor:
+                    mediumSizedFood === true ? colors.vermillionLight : 'white',
+                  alignItems: 'center',
+                  paddingTop: 6,
+                  borderRadius: 15,
+                }}>
+                <Text style={{textAlign: 'center', fontWeight: 'bold'}}>M</Text>
+              </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.centralJustifiedView}>

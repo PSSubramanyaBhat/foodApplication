@@ -18,7 +18,7 @@ import {
   ImageBackground,
   Platform,
 } from 'react-native';
-import {color} from 'react-native-reanimated';
+// import {color} from 'react-native-reanimated';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 

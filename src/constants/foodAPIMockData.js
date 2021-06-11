@@ -3,6 +3,7 @@ export default [
   {
     id: 1,
     categoryName: 'Burger',
+    categoryIcon: imagePath.burgerIcon,
     alternateHotels: [
       {
         hotelName: 'Shiva Sagar',
@@ -154,21 +155,26 @@ export default [
   {
     id: 2,
     categoryName: 'Pizza',
+    categoryIcon: imagePath.pizzaIcon,
   },
   {
     id: 3,
     categoryName: 'Dessert',
+    categoryIcon: imagePath.dessertIcon,
   },
   {
     id: 4,
     categoryName: 'Fries',
+    categoryIcon: imagePath.friesIcon,
   },
   {
     id: 5,
     categoryName: 'Drinks',
+    categoryIcon: imagePath.drinkscon,
   },
   {
     id: 6,
     categoryName: 'Pasta',
+    categoryIcon: imagePath.pastaIcon,
   },
 ];
