@@ -29,6 +29,9 @@ const LandingPage = ({navigation}) => {
   const [selectSearchTab, setSelectSearchTab] = useState(false);
   const [selectFavouriteTab, setSelectFavouriteTab] = useState(false);
   const [selectProfileTab, setSelectProfileTab] = useState(false);
+  const [selectedFoodCategoryTile, setSelectedFoodCategoryTile] = useState(
+    foodAPIMockData[0].categoryName,
+  );
 
   const itemdata = foodAPIMockData[0].menu;
   return (
@@ -148,11 +151,27 @@ const LandingPage = ({navigation}) => {
                 return item.id;
               }}
               renderItem={({item, index}) => (
-                <View key={index} style={styles.foodType}>
-                  <Text style={{fontSize: 16, fontWeight: '600'}}>
-                    {foodAPIMockData[index].categoryName}
-                  </Text>
-                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    console.log('PRESSED Item', item.categoryName);
+                    setSelectedFoodCategoryTile(item.categoryName);
+                  }}>
+                  <View
+                    key={index}
+                    style={[
+                      {
+                        backgroundColor:
+                          selectedFoodCategoryTile === item.categoryName
+                            ? colors.secondaryGold
+                            : 'white',
+                      },
+                      styles.foodType,
+                    ]}>
+                    <Text style={{fontSize: 16, fontWeight: '600'}}>
+                      {foodAPIMockData[index].categoryName}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               )}
             />
           </View>
@@ -239,7 +258,28 @@ const LandingPage = ({navigation}) => {
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('FoodDisplayPage');
+                    const selectedFoodName = itemdata[index].itemName;
+                    const selectedFoodRating = itemdata[index].rating;
+                    const selectedFoodCost = itemdata[index].cost;
+                    const selectedFoodImage = itemdata[index].image;
+                    const selectedFoodTimeDuration =
+                      itemdata[index].timeDuration;
+                    const selectedFoodDescription = itemdata[index].description;
+                    const selectedFoodIngredients = itemdata[index].ingredients;
+                    const selectedFoodIngredientImages =
+                      itemdata[index].ingredientImages;
+
+                    const jsonData = {
+                      selectedFoodName: selectedFoodName,
+                      selectedFoodRating: selectedFoodRating,
+                      selectedFoodCost: selectedFoodCost,
+                      selectedFoodImage: selectedFoodImage,
+                      selectedFoodTimeDuration: selectedFoodTimeDuration,
+                      selectedFoodDescription: selectedFoodDescription,
+                      selectedFoodIngredients: selectedFoodIngredients,
+                      selectedFoodIngredientImages: selectedFoodIngredientImages,
+                    };
+                    navigation.navigate('FoodDisplayPage', {jsonData});
                   }}>
                   <View style={styles.addButton}>
                     <Image
@@ -571,7 +611,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   foodType: {
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     height: 45,
     paddingHorizontal: 20,
     paddingVertical: 12,

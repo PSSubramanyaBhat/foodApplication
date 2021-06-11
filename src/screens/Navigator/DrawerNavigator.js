@@ -120,7 +120,7 @@ const HomePageDrawerNavigation = ({navigation}) => {
         name="SampleScreen"
         component={SampleScreen}
         options={{
-          title: 'Sample Screen',
+          title: 'Logout',
           drawerIcon: () => (
             <Image
               style={{

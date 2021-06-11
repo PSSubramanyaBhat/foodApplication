@@ -58,4 +58,12 @@ export default {
   hotelOutline: require('../assets/images/navigationIcons/drawerIcons//hotelB.png'),
   hotelFilled: require('../assets/images/navigationIcons/drawerIcons/hotelA.png'),
   menuIcon: require('../assets/images/navigationIcons/menu.png'),
+  oilIcon: require('../assets/images/oil.png'),
+  waterIcon: require('../assets/images/waterImage.png'),
+  saltIcon: require('../assets/images/salt.png'),
+  pepperIcon: require('../assets/images/pepper.png'),
+  chilliIcon: require('../assets/images/chilliPowder.png'),
+  downChevronIcon: require('../assets/images/downChevron.png'),
+  upChevronIcon: require('../assets/images/upChevron.png'),
+  tomatoIcon: require('../assets/images/tomato.png'),
 };

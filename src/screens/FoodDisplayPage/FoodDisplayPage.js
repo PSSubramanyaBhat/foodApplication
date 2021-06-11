@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import colors from '../../constants/colors';
 import {MapIcon} from '../../constants/commonSVGFiles';
 import imagePath from '../../constants/imagePath';
@@ -18,15 +18,19 @@ import {
   FlatList,
   ImageBackground,
   Platform,
+  LayoutAnimation,
+  UIManager,
 } from 'react-native';
 import {color} from 'react-native-reanimated';
 import {ClipPath} from 'react-native-svg';
 
 const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 
-const FoodDisplayPage = ({navigation}) => {
+const FoodDisplayPage = ({navigation, route}) => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
   const [toggleSection, setToggleSection] = useState(true);
+  const [expanded, setExpanded] = useState(false);
+
   const itemdata = foodAPIMockData[0].menu;
   const ingredientData = foodAPIMockData[0].menu[0].ingredientImages;
   const ingredientNameData = foodAPIMockData[0].menu[0].ingredients;
@@ -34,6 +38,46 @@ const FoodDisplayPage = ({navigation}) => {
 
   const [currentFoodOrderCount, setCurrentFoodOrderCount] = useState(0);
   const [addToFavourite, setAddToFavourite] = useState(false);
+
+  const [descriptionStatus, setDescriptionStatus] = useState(false);
+
+  const selectedData = route.params.jsonData;
+
+  const selectedFoodCost = selectedData.selectedFoodCost;
+  const selectedFoodImage = selectedData.selectedFoodImage;
+  const selectedFoodName = selectedData.selectedFoodName;
+  const selectedFoodRating = selectedData.selectedFoodRating;
+  const selectedFoodTimeDuration = selectedData.selectedFoodTimeDuration;
+  const selectedFoodDescription = selectedData.selectedFoodDescription;
+  const selectedFoodIngredients = selectedData.selectedFoodIngredients;
+  const selectedFoodIngredientImages =
+    selectedData.selectedFoodIngredientImages;
+
+  const selectedIngredientInformation = {
+    selectedFoodIngredients: selectedFoodIngredients,
+    selectedFoodIngredientImages: selectedFoodIngredientImages,
+  };
+
+  // console.log('FOOD Display Data', selectedIngredientInformation);
+
+  const ingredientsArray = [];
+
+  for (let i = 0; i < selectedFoodIngredients.length; i += 1) {
+    ingredientsArray.push({
+      name: selectedFoodIngredients[i].name,
+      image: selectedFoodIngredientImages[i].icon,
+    });
+  }
+
+  console.log('FOOD Display Data', ingredientsArray);
+
+  if (
+    Platform.OS === 'android' &&
+    UIManager.setLayoutAnimationEnabledExperimental
+  ) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+
   return (
     <>
       <StatusBar
@@ -75,7 +119,8 @@ const FoodDisplayPage = ({navigation}) => {
           <View style={styles.centralJustifiedView}>
             <Image
               style={styles.foodImageDisplay}
-              source={imagePath.burgerImage}
+              // source={imagePath.burgerImage}
+              source={selectedFoodImage}
             />
           </View>
 
@@ -93,8 +138,8 @@ const FoodDisplayPage = ({navigation}) => {
                     style={styles.favouriteIcon}
                     source={
                       addToFavourite
-                        ? imagePath.favouriteOff
-                        : imagePath.favouriteOn
+                        ? imagePath.favouriteOn
+                        : imagePath.favouriteOff
                     }
                   />
                 </TouchableOpacity>
@@ -117,7 +162,8 @@ const FoodDisplayPage = ({navigation}) => {
                     marginLeft: 13,
                     marginTop: 15,
                   }}>
-                  Special Cheese Burger
+                  {/* Special Cheese Burger */}
+                  {selectedFoodName}
                 </Text>
                 <View style={{flexDirection: 'row', marginLeft: 3}}>
                   <Image style={styles.mapIcon} source={imagePath.mapIcon} />
@@ -134,21 +180,29 @@ const FoodDisplayPage = ({navigation}) => {
                   }}>
                   <View style={{flexDirection: 'row'}}>
                     <Image style={styles.mapIcon} source={imagePath.cashIcon} />
-                    <Text style={{marginTop: 8, marginLeft: 2}}>$15.00</Text>
+                    <Text style={{marginTop: 8, marginLeft: 2}}>
+                      {/* $15.00 */}${selectedFoodCost}
+                    </Text>
                   </View>
                   <View style={{flexDirection: 'row', marginLeft: 6}}>
                     <Image
                       style={styles.mapIcon}
                       source={imagePath.startIcon}
                     />
-                    <Text style={{marginTop: 9}}>4.5 stars</Text>
+                    <Text style={{marginTop: 9}}>
+                      {/* 4.5 stars */}
+                      {selectedFoodRating}
+                    </Text>
                   </View>
                   <View style={{flexDirection: 'row', marginLeft: 6}}>
                     <Image
                       style={styles.mapIcon}
                       source={imagePath.timerIcon}
                     />
-                    <Text style={{marginTop: 9}}>15-20 mins</Text>
+                    <Text style={{marginTop: 9}}>
+                      {/* 15-20 mins */}
+                      {selectedFoodTimeDuration}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -194,7 +248,8 @@ const FoodDisplayPage = ({navigation}) => {
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 onPress={() => {
-                  setToggleSection(!toggleSection);
+                  LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+                  setToggleSection(true);
                 }}>
                 <Text
                   style={
@@ -210,7 +265,8 @@ const FoodDisplayPage = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setToggleSection(!toggleSection);
+                  LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+                  setToggleSection(false);
                 }}>
                 <Text
                   style={
@@ -226,14 +282,31 @@ const FoodDisplayPage = ({navigation}) => {
               </TouchableOpacity>
             </View>
             <View style={{marginHorizontal: 30, marginTop: 15}}>
-              <Text style={{fontSize: 15, lineHeight: 25}}>
-                Cheeses like Cheddar, Gruyere, Parmesan, and its Pecorino work
-                well with all kinds of burgers.
-              </Text>
+              {toggleSection && (
+                <Text style={{fontSize: 15, lineHeight: 25}}>
+                  ▶ {selectedFoodDescription}
+                  {/* ◘ Cheeses like Cheddar,Gruyere, Parmesan, and Its Pecorino work
+                  well with all kinds of burgers. */}
+                </Text>
+              )}
+              {toggleSection === false && (
+                <View>
+                  <Text style={{fontSize: 15, lineHeight: 25}}>
+                    ⦿ This dish is really tasty
+                  </Text>
+                  <Text style={{fontSize: 15, lineHeight: 25}}>
+                    ⦿ The best I've had in a while
+                  </Text>
+                  <Text style={{fontSize: 15, lineHeight: 25}}>
+                    ⦿ It's tasty, a little more spice would make it even better.
+                  </Text>
+                </View>
+              )}
             </View>
             <FlatList
               style={{marginLeft: 20, marginTop: 20}}
-              data={ingredientData}
+              // data={ingredientData}
+              data={ingredientsArray}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item, index) => {
@@ -241,18 +314,72 @@ const FoodDisplayPage = ({navigation}) => {
               }}
               renderItem={({item, index}) => (
                 <View key={index} style={styles.foodType}>
-                  <Image style={{width: 40, height: 40}} source={item.icon} />
+                  <Image
+                    style={{width: 40, height: 40}}
+                    // source={item.icon}
+                    source={item.image}
+                  />
                   <Text
                     style={{
                       fontSize: 12,
                       fontWeight: '600',
                       paddingTop: 3,
                     }}>
-                    {ingredientNameData[index].name}
+                    {/* {ingredientNameData[index].name} */}
+                    {item.name}
                   </Text>
                 </View>
               )}
             />
+
+            <TouchableOpacity
+              onPress={() => {
+                LayoutAnimation.configureNext(
+                  LayoutAnimation.Presets.easeInEaseOut,
+                );
+                setDescriptionStatus(!descriptionStatus);
+              }}>
+              <View>
+                <View style={{flexDirection: 'row'}}>
+                  <Text
+                    style={{
+                      fontWeight: '600',
+                      marginLeft: 30,
+                      marginTop: 10,
+                      // marginBottom: -10,
+                      color: descriptionStatus ? 'black' : 'grey',
+                    }}>
+                    Description
+                  </Text>
+                  <Image
+                    style={styles.chevronDescriptionStyle}
+                    source={
+                      descriptionStatus
+                        ? imagePath.upChevronIcon
+                        : imagePath.downChevronIcon
+                    }
+                  />
+                </View>
+                {descriptionStatus && (
+                  <View
+                    style={{marginLeft: 30, marginTop: 10, marginRight: 20}}>
+                    <Text>◘ Slice the potatoes 1/2 inch thick.</Text>
+                    <Text style={{marginTop: 6}}>
+                      ◘ Soak them cold in water for at least an hour or
+                      overnight.
+                    </Text>
+                    <Text style={{marginTop: 6}}>
+                      ◘ (Rinse them twice with cold water and pat the completely
+                      dry. Heat oil to 300 degrees.
+                    </Text>
+                    <Text style={{marginTop: 6}}>
+                      ◘ Increase heat to 400 degrees. Place them bake on paper
+                      towels and sprinkle immediately with salt.
+                    </Text>
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
 
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -418,6 +545,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 10},
     shadowOpacity: 0.8,
     shadowRadius: 10,
+    resizeMode: 'contain',
   },
   foodInfoContainer: {
     backgroundColor: colors.white,
@@ -496,6 +624,12 @@ const styles = StyleSheet.create({
     // textAlign: 'center',
     flexDirection: 'row',
     backgroundColor: colors.secondaryGold,
+  },
+  chevronDescriptionStyle: {
+    marginTop: 14,
+    marginLeft: 7,
+    height: 10,
+    width: 10,
   },
 });
 export default FoodDisplayPage;
