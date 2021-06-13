@@ -177,4 +177,10 @@ export default [
     categoryName: 'Pasta',
     categoryIcon: imagePath.pastaIcon,
   },
+
+  {
+    id: 7,
+    categoryName: 'Popular',
+    categoryIcon: imagePath.fastFoodIcon2,
+  },
 ];

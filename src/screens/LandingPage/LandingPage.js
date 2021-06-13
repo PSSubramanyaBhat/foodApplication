@@ -30,7 +30,7 @@ const LandingPage = ({navigation}) => {
   const [selectFavouriteTab, setSelectFavouriteTab] = useState(false);
   const [selectProfileTab, setSelectProfileTab] = useState(false);
   const [selectedFoodCategoryTile, setSelectedFoodCategoryTile] = useState(
-    foodAPIMockData[0].categoryName,
+    foodAPIMockData[foodAPIMockData.length - 1].categoryName,
   );
 
   const itemdata = foodAPIMockData[0].menu;
@@ -210,11 +210,14 @@ const LandingPage = ({navigation}) => {
       <Text
         style={{
           fontSize: 14,
+          // fontSize: 16,
+          // letterSpacing: 0.1,
           fontWeight: 'bold',
           marginLeft: 25,
           marginBottom: 10,
         }}>
         Available to you
+        {/* RESULTS ({selectedFoodCategoryTile} category) */}
       </Text>
       {/* Line 1 */}
       <FlatList

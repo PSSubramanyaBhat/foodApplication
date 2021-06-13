@@ -51,6 +51,7 @@ export default {
   searchYellow: require('../assets/images/navigationIcons/searchA.png'),
   starYellow: require('../assets/images/navigationIcons/star.png'),
   starWhite: require('../assets/images/navigationIcons/starB.png'),
+  starVermillion: require('../assets/images/starVermillionIcon.png'),
   feedBackWhite: require('../assets/images/navigationIcons/drawerIcons/feedBackB.png'),
   feedBackYellow: require('../assets/images/navigationIcons/drawerIcons/feedBackA.png'),
   logOutOutline: require('../assets/images/navigationIcons/drawerIcons/logOutA.png'),
@@ -72,4 +73,8 @@ export default {
   friesIcon: require('../assets/images/foodCategoryIcons/friesIcon.png'),
   drinkscon: require('../assets/images/foodCategoryIcons/drinksIcon.png'),
   pastaIcon: require('../assets/images/foodCategoryIcons/pastaIcon.png'),
+  fastFoodIcon: require('../assets/images/foodCategoryIcons/fastFood.png'),
+  fastFoodIcon2: require('../assets/images/foodCategoryIcons/mcDIcon1.png'),
+  fastFoodIcon3: require('../assets/images/foodCategoryIcons/mcDIcon2.png'),
+  cancelIconWhite: require('../assets/images/cancelIconWhite.png'),
 };

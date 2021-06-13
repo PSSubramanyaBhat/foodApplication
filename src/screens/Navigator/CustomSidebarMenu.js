@@ -7,6 +7,7 @@ import {
   Text,
   Linking,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import imagePaths from '../../constants/imagePath';
 
@@ -36,7 +37,65 @@ const CustomSidebarMenu = (props) => {
     'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
   const proileImage = 'react_logo.png';
 
-  const openPicker = () => {
+  const renderFileData = () => {
+    if (filepath) {
+      console.log('SELECTED IMAGE', filepath);
+      return (
+        <Image
+          // source={{uri: 'data:image/jpeg;base64,' + filepath}}
+          // source={{uri: 'image/jpeg' + filepath.assets[0].uri}}
+          source={{
+            uri:
+              filepath.uri !== ''
+                ? filepath.assets[0].uri
+                : imagePaths.personIcon,
+          }}
+          style={styles.appAvtarImage}
+        />
+      );
+    } else {
+      return (
+        // <Image source={imagePaths.personIcon} style={styles.appAvtarImage} />
+        <Image style={styles.appAvtarImage} source={imagePaths.personIcon} />
+      );
+    }
+  };
+
+  const renderFileUri = () => {
+    if (this.state.fileUri) {
+      return (
+        <Image
+          source={{uri: this.state.fileUri}}
+          style={styles.appAvtarImage}
+        />
+      );
+    } else {
+      return (
+        <Image source={imagePaths.personIcon} style={styles.appAvtarImage} />
+      );
+    }
+  };
+
+  const selectImageSource = () => {
+    Alert.alert('Image Picker', 'Select the Image Source', [
+      {
+        text: 'Gallery',
+        onPress: () => {
+          // console.log('Cancel Pressed');
+          openImagePickerGallery();
+        },
+        // style: 'cancel',
+      },
+      {
+        text: 'Camera',
+        onPress: () => {
+          // console.log('OK Pressed');
+        },
+      },
+    ]);
+  };
+
+  const openImagePickerGallery = () => {
     let options = {
       storageOptions: {
         skipBackup: true,
@@ -44,6 +103,33 @@ const CustomSidebarMenu = (props) => {
       },
     };
     launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        const source = {uri: response.uri};
+        console.log('response', JSON.stringify(response));
+        setFilePath(response);
+        setFileData(response.data);
+        setFileUri(response.uri);
+      }
+    });
+  };
+
+  const openImagePickerCamera = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchCamera(options, (response) => {
       console.log('Response = ', response);
 
       if (response.didCancel) {
@@ -74,16 +160,23 @@ const CustomSidebarMenu = (props) => {
       {/*Top Large Image */}
       <TouchableOpacity
         onPress={() => {
-          openPicker();
+          // openImagePickerGallery();
+          // openImagePickerCamera();
+          selectImageSource();
         }}>
         <View style={styles.circularAvtar}>
-          <Image
+          {/* <Image
             style={styles.appAvtarImage}
-            // source={{uri: BASE_PATH + proileImage}}
-            // source={imagePaths.personIcon}
+            source={{uri: BASE_PATH + proileImage}}
             source={imagePaths.personIcon}
-          />
+            source={imagePaths.personIcon}
+          /> */}
+          {renderFileData()}
         </View>
+        {/* <View>
+          {renderFileData()}
+          <Text style={{textAlign: 'center'}}>Base 64 String</Text>
+        </View> */}
       </TouchableOpacity>
       <Text style={{color: colors.white, textAlign: 'center', marginTop: 10}}>
         SUBRAMANYA BHAT PS
@@ -122,7 +215,7 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 50,
     borderColor: 'white',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     borderStyle: 'solid',
     borderWidth: 2,
     alignSelf: 'center',
@@ -130,7 +223,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   appAvtarImage: {
-    resizeMode: 'center',
+    resizeMode: 'cover',
     // width: 100,
     // height: 100,
     borderRadius: 100 / 2,

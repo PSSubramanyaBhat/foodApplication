@@ -28,13 +28,17 @@ const MyOrdersPage = ({navigation}) => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
   const [toggleSection, setToggleSection] = useState(true);
   const itemdata = foodAPIMockData[0].menu;
-//   const dishNameData = foodAPIMockData[0].categoryName;
+  //   const dishNameData = foodAPIMockData[0].categoryName;
   const ingredientData = foodAPIMockData[0].menu[0].ingredientImages;
   const ingredientNameData = foodAPIMockData[0].menu[0].ingredients;
   const hotelData = foodAPIMockData[0].alternateHotels;
 
   const [currentFoodOrderCount, setCurrentFoodOrderCount] = useState(0);
   const [addToFavourite, setAddToFavourite] = useState(false);
+  const [longPressFlag, setLongPressFlag] = useState(false);
+
+  const [selectedOrder, setSelectedOrder] = useState(hotelData[0].hotelName);
+
   return (
     <>
       <StatusBar
@@ -74,8 +78,8 @@ const MyOrdersPage = ({navigation}) => {
             </View>
           </View>
 
-          <View style={{flexDirection: 'column'}}>
-            <View style={{flexDirection: 'row'}}>
+          <View style={{flex: 1}}>
+            <View>
               <Text style={styles.ingredient_review_Section}>My Orders</Text>
             </View>
 
@@ -89,58 +93,183 @@ const MyOrdersPage = ({navigation}) => {
                 return item.id;
               }}
               renderItem={({item, index}) => (
-                <View key={index} style={styles.centralJustifiedView}>
-                  <View style={styles.hotelInfoContainer}>
-                    <Image
-                      style={styles.hotelImageView}
-                      source={hotelData[index].hotelImage}
-                    />
-                    <View style={styles.hotelInfoView}>
-                      <Text style={{fontSize: 20, fontWeight: '600'}}>
-                        Hotel {hotelData[index].hotelName}
-                        {/* Hotel */}
-                      </Text>
-                      <View style={{flexDirection: 'row', marginLeft: -11}}>
-                        <Image
-                          style={styles.mapIcon}
-                          source={imagePath.mapIcon}
-                        />
-                        <Text
-                          style={{paddingTop: 9, paddingLeft: 2, fontSize: 12}}>
-                          {hotelData[index].hotelLocation},{' '}
-                          {hotelData[index].hotelArea},{' '}
-                          {hotelData[index].hotelState}
+                <View key={index} style={{marginLeft: 20}}>
+                  <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setLongPressFlag(false);
+                        setSelectedOrder(item.hotelName);
+                      }}
+                      onLongPress={() => {
+                        setLongPressFlag(true);
+                        setSelectedOrder(item.hotelName);
+                      }}
+                      style={[
+                        styles.hotelInfoContainer,
+                        {
+                          // shadowColor: '#000000',
+                          shadowColor:
+                            longPressFlag && selectedOrder === item.hotelName
+                              ? colors.borderGrey
+                              : colors.white,
+                          shadowOffset: {width: 4, height: 2},
+                          shadowOpacity: 0.9,
+                          shadowRadius: 3,
+                          elevation: longPressFlag ? 3 : 0,
+                          width:
+                            longPressFlag && selectedOrder === item.hotelName
+                              ? '86%'
+                              : '83%',
+                        },
+                      ]}>
+                      <Image
+                        style={styles.hotelImageView}
+                        source={hotelData[index].hotelImage}
+                      />
+                      <View style={styles.hotelInfoView}>
+                        <Text style={{fontSize: 20, fontWeight: '600'}}>
+                          Hotel {hotelData[index].hotelName}
+                          {/* Hotel */}
                         </Text>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            marginLeft: -11,
+                            // flexWrap: 'wrap',
+                            // flex: 1,
+                          }}>
+                          <Image
+                            style={styles.mapIcon}
+                            source={imagePath.mapIcon}
+                          />
+                          <Text
+                            style={{
+                              paddingTop: 9,
+                              paddingLeft: 2,
+                              fontSize: 12,
+                              // flexShrink: 1,
+                              // flexWrap: 'wrap',
+                              // width: 150,
+                            }}>
+                            {hotelData[index].hotelLocation},{' '}
+                            {hotelData[index].hotelArea},{' '}
+                            {/* {hotelData[index].hotelState} */}
+                            {/* I WOULD LIKE TO SHOW the complete Map Via a dialogue box which appeares when I hover the cursor/tap on map icon... and then can connect to Maps/Google Maps */}
+                          </Text>
+                        </View>
+                        <View style={{flexDirection: 'row', marginLeft: -11}}>
+                          <Image
+                            style={styles.mapIcon}
+                            source={imagePath.startIcon}
+                          />
+                          <Text
+                            style={{
+                              paddingTop: 7,
+                              paddingLeft: 2,
+                              fontSize: 16,
+                            }}>
+                            {hotelData[index].hotelRating} stars
+                          </Text>
+                        </View>
                       </View>
-                      <View style={{flexDirection: 'row', marginLeft: -11}}>
-                        <Image
-                          style={styles.mapIcon}
-                          source={imagePath.startIcon}
-                        />
+                    </TouchableOpacity>
+
+                    {longPressFlag && selectedOrder === item.hotelName && (
+                      <TouchableOpacity>
+                        <View
+                          style={[
+                            styles.plusMinusView,
+                            {
+                              marginTop: 55,
+                              marginLeft: 11,
+                              backgroundColor: colors.vermillion,
+                              borderColor: colors.white,
+                              borderWidth: 1,
+                              shadowColor: colors.vermillion,
+                              shadowOffset: {width: 3, height: 3},
+                              shadowOpacity: 0.9,
+                              shadowRadius: 3,
+                              elevation: 3,
+                            },
+                          ]}>
+                          {/* <Text
+                            style={{
+                              fontSize: 25,
+                              fontWeight: 'bold',
+                              color: colors.white,
+                              marginTop: -3,
+                            }}>
+                            𝘅
+                          </Text> */}
+                          <Image
+                            style={styles.cancelIcon}
+                            source={imagePath.cancelIconWhite}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    )}
+
+                    {!longPressFlag && (
+                      <View style={styles.buttonSection}>
+                        <TouchableOpacity>
+                          <View
+                            style={[
+                              styles.plusMinusView,
+                              {marginTop: 10, backgroundColor: colors.darkBg2},
+                            ]}>
+                            {/* <Image
+                            style={styles.plusMinusIcons}
+                            source={imagePath.addIcon}
+                          /> */}
+                            <Text
+                              style={{
+                                // fontSize: 20,
+                                fontSize: 24,
+                                fontWeight: 'bold',
+                                color: colors.white,
+                              }}>
+                              +
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
                         <Text
-                          style={{paddingTop: 7, paddingLeft: 2, fontSize: 16}}>
-                          {hotelData[index].hotelRating} stars
+                          style={{
+                            fontSize: 15,
+                            fontWeight: '600',
+                            paddingLeft: 8,
+                            paddingTop: 5,
+                            marginLeft: 5,
+                          }}>
+                          0
                         </Text>
+                        <TouchableOpacity>
+                          <View
+                            style={[
+                              styles.plusMinusView,
+                              {marginTop: 5, backgroundColor: colors.darkBg2},
+                            ]}>
+                            {/* <Image
+                            style={styles.plusMinusIcons}
+                            source={imagePath.minusIcon}
+                          /> */}
+                            <Text
+                              style={{
+                                // fontSize: 20,
+                                fontSize: 24,
+                                fontWeight: 'bold',
+                                color: colors.white,
+                              }}>
+                              -
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
                       </View>
-                    </View>
+                    )}
                   </View>
                 </View>
               )}
             />
 
-            <View style={styles.centralJustifiedView}>
-              <View style={{flexDirection: 'column', alignItems: 'center'}}>
-                <View style={{flexDirection: 'row'}}></View>
-                <TouchableOpacity>
-                  <View style={styles.orderButton}>
-                    <Text
-                      style={{fontSize: 20, fontWeight: '400', marginTop: 9}}>
-                      Order Now $80
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
             <View
               style={{
                 height: 20,
@@ -150,13 +279,29 @@ const MyOrdersPage = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
+      <View style={{marginBottom: 20}}>
+        <View style={{alignItems: 'center'}}>
+          <TouchableOpacity>
+            <View style={styles.orderButton}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: '400',
+                  marginTop: 14,
+                }}>
+                Order Now $80
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     </>
   );
 };
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    flexDirection: 'column',
+    // flexDirection: 'column',
   },
   topSection: {
     flexDirection: 'row',
@@ -174,12 +319,14 @@ const styles = StyleSheet.create({
   plusMinusView: {
     height: 35,
     width: 35,
-    backgroundColor: colors.secondaryGold,
+    // backgroundColor: colors.secondaryGold,
+    // backgroundColor: colors.darkBg2,
     // marginHorizontal: 15,
     borderRadius: 5,
     alignItems: 'center',
     // marginTop: 15,
     marginRight: 10,
+    justifyContent: 'center',
   },
   bagIconView: {
     backgroundColor: colors.secondaryGold,
@@ -213,6 +360,12 @@ const styles = StyleSheet.create({
     height: 18,
     width: 18,
   },
+  cancelIcon: {
+    // marginTop: 8,
+    // marginLeft: 7,
+    height: 18,
+    width: 18,
+  },
   favouriteIcon: {
     marginTop: -12,
     marginLeft: 1,
@@ -220,9 +373,9 @@ const styles = StyleSheet.create({
     width: 18,
   },
   centralJustifiedView: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   foodImageDisplay: {
     height: 250,
@@ -266,7 +419,8 @@ const styles = StyleSheet.create({
   },
   hotelInfoContainer: {
     backgroundColor: colors.white,
-    width: '90%',
+    // width: '90%',//ORIGINAL SIZE
+    // width: '83%',
     // height: '53%',
     borderRadius: 10,
     marginTop: 10,
@@ -298,7 +452,8 @@ const styles = StyleSheet.create({
     marginLeft: 35,
   },
   orderButton: {
-    height: 45,
+    // height: 45,
+    height: 55,
     // width: 153,
     width: 375,
     // marginLeft: 15,
@@ -312,6 +467,10 @@ const styles = StyleSheet.create({
     // textAlign: 'center',
     flexDirection: 'row',
     backgroundColor: colors.secondaryGold,
+  },
+  buttonSection: {
+    marginTop: 10,
+    marginLeft: 15,
   },
 });
 export default MyOrdersPage;

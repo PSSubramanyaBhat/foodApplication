@@ -105,7 +105,11 @@ const FoodDisplayPage = ({navigation, route}) => {
                 <Image style={styles.icons2} source={imagePath.backArrowIcon} />
               </View>
             </TouchableOpacity>
-            <View style={[styles.topSectionButton, styles.bagIconView]}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('MyOrdersPage');
+              }}
+              style={[styles.topSectionButton, styles.bagIconView]}>
               <View style={styles.orderCountContainer}>
                 <Text
                   style={{
@@ -119,7 +123,7 @@ const FoodDisplayPage = ({navigation, route}) => {
                 </Text>
               </View>
               <Image style={styles.icons} source={imagePath.bagIcon} />
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.centralJustifiedView}>
             <Image
@@ -384,6 +388,7 @@ const FoodDisplayPage = ({navigation, route}) => {
                   </Text>
                 </View>
               )}
+              {/* ADD A TEXT INPUT FOR WRITE REVIEW FOR THIS DISH... and try adding that to the current array of reviews and display it in FlatList... */}
             </View>
             <FlatList
               style={{marginLeft: 20, marginTop: 20}}
