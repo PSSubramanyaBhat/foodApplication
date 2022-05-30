@@ -178,10 +178,22 @@ const CustomSidebarMenu = (props) => {
           <Text style={{textAlign: 'center'}}>Base 64 String</Text>
         </View> */}
       </TouchableOpacity>
-      <Text style={{color: colors.white, textAlign: 'center', marginTop: 10}}>
+      <Text
+        style={{
+          color: colors.white,
+          textAlign: 'center',
+          marginTop: 10,
+          fontFamily: 'Raleway-Bold',
+        }}>
         SUBRAMANYA BHAT PS
       </Text>
-      <Text style={{color: colors.white, textAlign: 'center', marginTop: 5}}>
+      <Text
+        style={{
+          color: colors.white,
+          textAlign: 'center',
+          marginTop: 5,
+          fontFamily: 'Montserrat-Bold',
+        }}>
         FoodCourt App
       </Text>
       <Divider dividerColor={colors.white} />

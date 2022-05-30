@@ -26,7 +26,7 @@ const BETWEEN_GRID_WIDTH = Platform.OS === 'ios' ? 14 : 9;
 const LandingPage = ({navigation}) => {
   // const [selectFoodCategory, setSelectFoodCategory] = useState(false);
   const [selectHomeTab, setSelectHomeTab] = useState(true);
-  const [selectSearchTab, setSelectSearchTab] = useState(false);
+  const [selectFoodGramTab, setSelectfoodGramTab] = useState(false);
   const [selectFavouriteTab, setSelectFavouriteTab] = useState(false);
   const [selectProfileTab, setSelectProfileTab] = useState(false);
   const [selectedFoodCategoryTile, setSelectedFoodCategoryTile] = useState(
@@ -66,7 +66,12 @@ const LandingPage = ({navigation}) => {
               <Image style={styles.icons2} source={imagePath.searchIcon} />
             </TouchableOpacity>
             <TextInput
-              style={{marginLeft: 12, fontSize: 13, letterSpacing: 0.01}}
+              style={{
+                marginLeft: 12,
+                fontSize: 13,
+                letterSpacing: 0.01,
+                fontFamily: 'Montserrat-Regular',
+              }}
               placeholder={'Search for food'}
               placeholderTextColor={colors.darkGrey}></TextInput>
           </View>
@@ -83,6 +88,7 @@ const LandingPage = ({navigation}) => {
                     marginLeft: 5,
                     marginTop: 1,
                     fontSize: 12,
+                    fontFamily: 'Montserrat-Regular',
                   }}>
                   0
                 </Text>
@@ -108,11 +114,25 @@ const LandingPage = ({navigation}) => {
                 <View style={styles.timeBlock}>
                   <Text style={styles.timeColor}>41</Text>
                 </View>
-                <Text style={{marginTop: 17, marginLeft: 5}}>hrs.</Text>
+                <Text
+                  style={{
+                    marginTop: 17,
+                    marginLeft: 5,
+                    fontFamily: 'Raleway-Regular',
+                  }}>
+                  hrs.
+                </Text>
               </View>
               <TouchableOpacity>
                 <View style={styles.orderButton}>
-                  <Text style={{fontSize: 17, marginTop: 9}}>Order Now</Text>
+                  <Text
+                    style={{
+                      fontSize: 17,
+                      marginTop: 9,
+                      fontFamily: 'Lato-Regular',
+                    }}>
+                    Order Now
+                  </Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -129,8 +149,15 @@ const LandingPage = ({navigation}) => {
                     marginTop: 14,
                     textAlign: 'center',
                     fontWeight: '600',
+                    fontFamily: 'Lato-Regular',
                   }}>
-                  SPECIAL <Text style={{color: colors.white}}>OFFER</Text>
+                  SPECIAL{' '}
+                  <Text
+                    style={{
+                      color: colors.white,
+                    }}>
+                    OFFER
+                  </Text>
                 </Text>
                 {/* <Text>OFFER</Text> */}
               </View>
@@ -197,6 +224,7 @@ const LandingPage = ({navigation}) => {
                       fontSize: 10,
                       fontWeight: '600',
                       textAlign: 'center',
+                      fontFamily: 'Montserrat-Regular',
                     }}>
                     {foodAPIMockData[index].categoryName}
                   </Text>
@@ -215,6 +243,7 @@ const LandingPage = ({navigation}) => {
           fontWeight: 'bold',
           marginLeft: 25,
           marginBottom: 10,
+          fontFamily: 'Montserrat-Regular',
         }}>
         Available to you
         {/* RESULTS ({selectedFoodCategoryTile} category) */}
@@ -350,7 +379,7 @@ const LandingPage = ({navigation}) => {
         <TouchableOpacity
           onPress={() => {
             setSelectHomeTab(true);
-            setSelectSearchTab(false);
+            setSelectfoodGramTab(false);
             setSelectFavouriteTab(false);
             setSelectProfileTab(false);
           }}>
@@ -379,10 +408,10 @@ const LandingPage = ({navigation}) => {
         <TouchableOpacity
           onPress={() => {
             setSelectHomeTab(false);
-            setSelectSearchTab(true);
+            setSelectfoodGramTab(true);
             setSelectFavouriteTab(false);
             setSelectProfileTab(false);
-            navigation.navigate('SearchPage');
+            navigation.navigate('FoodGramScreen');
           }}>
           <View>
             <Image
@@ -393,23 +422,25 @@ const LandingPage = ({navigation}) => {
                 alignSelf: 'center',
               }}
               source={
-                selectSearchTab ? imagePath.searchYellow : imagePath.searchWhite
+                selectFoodGramTab
+                  ? imagePath.foodGramIcon
+                  : imagePath.foodGramOutlineIcon
               }
             />
             <Text
               style={
-                selectSearchTab
+                selectFoodGramTab
                   ? {color: colors.gold2, fontSize: 12, paddingTop: 3}
                   : {color: colors.white, fontSize: 12, paddingTop: 3}
               }>
-              Search
+              FoodGram
             </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             setSelectHomeTab(false);
-            setSelectSearchTab(false);
+            setSelectfoodGramTab(false);
             setSelectFavouriteTab(true);
             setSelectProfileTab(false);
           }}>
@@ -440,7 +471,7 @@ const LandingPage = ({navigation}) => {
         <TouchableOpacity
           onPress={() => {
             setSelectHomeTab(false);
-            setSelectSearchTab(false);
+            setSelectfoodGramTab(false);
             setSelectFavouriteTab(false);
             setSelectProfileTab(true);
           }}>
@@ -522,6 +553,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.6,
     marginTop: 10,
     marginLeft: 13,
+    fontFamily: 'Raleway-Regular',
   },
   foodInfoSection: {
     flexDirection: 'column',
@@ -576,6 +608,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginLeft: 6,
     paddingLeft: 1,
+    fontFamily: 'Montserrat-Regular',
     // textAlign: 'center',
   },
   imageDisplay: {
@@ -685,23 +718,27 @@ const styles = StyleSheet.create({
     marginLeft: 13,
     marginTop: 5,
     fontWeight: '600',
+    fontFamily: 'Raleway-Regular',
   },
   gridFoodType1: {
     fontSize: 12,
     marginLeft: 13,
     marginTop: 5,
     fontWeight: '500',
+    fontFamily: 'Montserrat-Regular',
   },
   gridRating: {
     marginLeft: 2,
     marginTop: 4,
     fontSize: 12,
+    fontFamily: 'Montserrat-Regular',
   },
   gridCost: {
     marginLeft: 13,
     marginTop: 8,
     fontSize: 19,
     fontWeight: '700',
+    fontFamily: 'Montserrat-Regular',
   },
   gridImage: {
     height: 120,

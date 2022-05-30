@@ -20,4 +20,11 @@ export default {
   changePasswordText1: 'Enter Old Password',
   changePasswordText2: 'Enter New Password',
   save: 'Save',
+  emailPlaceHolder: 'abc@email.com',
+  passwordPlaceHolder: 'Enter your password',
+  confirmPasswordPlaceHolder: 'Enter your password again',
+  // userNamePlaceholder: 'Enter your email/ mobile number/ username',
+  emailPlaceholder: 'Enter your email',
+  mobileNumberPlaceholder: 'Enter your mobile number',
+  userNamePlaceholder: 'Enter your username',
 };

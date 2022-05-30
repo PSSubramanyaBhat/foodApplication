@@ -15,6 +15,9 @@ import Rating from '../Rating/Rating';
 import Feedback from '../Feedback/Feedback';
 import SampleDrawerPage from '../Feedback/SampleDrawerPage';
 import StarredHotels from '../StarredHotels/StarredHotels';
+import FoodGramScreen from '../FoodGramScreen/FoodGramScreen';
+import KitchenGramLogin from '../KitchenGramLogin/KitchenGramLogin';
+import KitchenGramRegister from '../KitchenGramRegister/KitchenGramRegister';
 
 const Stack = createStackNavigator();
 
@@ -81,6 +84,21 @@ const StackScreens = () => {
         component={SampleDrawerPage}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="FoodGramScreen"
+        component={FoodGramScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="KitchenGramLogin"
+        component={KitchenGramLogin}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="KitchenGramRegister"
+        component={KitchenGramRegister}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
@@ -126,6 +144,21 @@ const HomeScreen = () => {
       <Stack.Screen
         name="SampleDrawerPage"
         component={SampleDrawerPage}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="FoodGramScreen"
+        component={FoodGramScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="KitchenGramLogin"
+        component={KitchenGramLogin}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="KitchenGramRegister"
+        component={KitchenGramRegister}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
